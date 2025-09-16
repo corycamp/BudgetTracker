@@ -17,22 +17,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="hidden lg:flex flex-row h-16 mb-2 w-full border-b-1 border-b-gray-300 justify-between items-center sticky top-0">
+    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-b-gray-300 bg-white justify-between items-center sticky top-0">
       <div className="w-auto flex">
         <Link href={`/Dashboard`}>
-          <div className="ml-4 flex flex-row items-center">
+          <div className="flex flex-row items-center">
             <Image src={logo} alt={"Logo"} width={50} />
-            <h1 className="ml-2 text-[25px]">BudgetTracker</h1>
+            <h1 className="ml-2 text-[20px] font-medium">BudgetTracker</h1>
           </div>
         </Link>
       </div>
-      <div className="w-auto flex flex-row justify-center">
+      <div className="w-auto flex flex-row justify-center mr-10">
         {getNavLinks().map((item) => {
           return (
             <div
               key={item}
               className={clsx(
-                "ml-10 flex w-auto text-[24px]",
+                "ml-10 flex w-auto text-[19px] font-medium",
                 !pathname.includes(item.toLowerCase())
                   ? "text-gray-400"
                   : "text-black"
@@ -47,11 +47,11 @@ const Navbar = () => {
       </div>
       <div className="w-auto flex justify-end-safe">
         <div className="flex mr-5 border rounded-4xl p-2 bg-emerald-400">
-          <Image src={bell} alt={"Logo"} width={25} />
+          <Image src={bell} alt={"Logo"} width={20} />
         </div>
-        <div className="flex mr-10 border rounded-4xl p-2">
+        <div className="flex border rounded-4xl p-2">
           <Link href={`/Account`}>
-            <Image src={avatar} alt={"Logo"} width={25} />
+            <Image src={avatar} alt={"Logo"} width={20} />
           </Link>
         </div>
       </div>
