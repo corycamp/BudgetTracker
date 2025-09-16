@@ -1,1 +1,2 @@
-interface Dashboard{}
+interface Dashboard {}
+type NavbarLink = "Dashboard" | "Transactions" | "Budget" | "Reports";
