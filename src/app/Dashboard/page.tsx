@@ -40,7 +40,7 @@ const Dashboard = () => {
           );
         })}
       </div>
-      <div className="flex flex-col md:flex-row mt-10 justify-between">
+      <div className="flex flex-col lg:flex-row mt-10 justify-between">
         <SummaryCard />
         <RecentTransactions />
       </div>
