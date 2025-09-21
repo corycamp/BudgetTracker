@@ -3,7 +3,7 @@ const PageProvier = (props: PageProviderProps) => {
 
   return (
     <div className="pl-10 pr-10">
-      <div className="flex flex-row pt-5 mb-10">
+      <div className="flex flex-row pt-5 mb-10 mt-15 lg:mt-0">
         <div className="w-full md:w-1/2 flex flex-col">
           <h1 className="text-[35px] font-bold">{pageName}</h1>
           {!!pageSubHeading && (

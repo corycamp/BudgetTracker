@@ -64,7 +64,7 @@ const Navbar = () => {
   )
 
   const mobileNavBar = ()=>(
-    <nav className={`flex flex-row lg:hidden h-16 ${isOpen && "h-full"} w-full border-b-1 border-b-gray-300 bg-white justify-between sticky top-0`}>
+    <nav className={`flex flex-row lg:hidden h-16 ${isOpen && "h-full"} w-full border-b-1 border-b-gray-300 bg-white justify-between fixed top-0`}>
     <div className="flex flex-col w-full pr-10 pl-10 mt-2">
     <div className="flex flex-row w-full">
      <div className="w-auto flex">
@@ -105,7 +105,7 @@ const Navbar = () => {
                   : "text-black"
               )}
             >
-              <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`}>
+              <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`} shallow={false}>
                 {item}
               </Link>
             </div>
