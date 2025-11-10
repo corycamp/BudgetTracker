@@ -12,3 +12,14 @@ interface CardProps {
   title: string;
   amount: number;
 }
+
+interface InputFieldProps {
+  id: string;
+  title: string;
+  placeholder: string;
+  frontAdornment?: string;
+  showSelection?: boolean;
+  options?: string[];
+  customInputClass?: string;
+  inputType?: string;
+}

@@ -60,7 +60,7 @@ const Table = () => {
 
   const desktopTableItem = () => {
     return (
-      <div className="hidden lg:flex flex-col mt-6">
+      <div className="hidden lg:flex flex-col">
         <div className="flex flex-row w-full">{tableHeader()}</div>
         {Array.from({ length: 5 }, (_i, index) => {
           return (
@@ -75,7 +75,7 @@ const Table = () => {
 
   return (
     <div className="flex flex-col mb-10 p-10 lg:w-full bg-white border-1 border-gray-300 rounded-4xl max-h-155 overflow-auto">
-      <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold">
+      <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold mb-6">
         {title}
       </h1>
       {hasValue ? (
