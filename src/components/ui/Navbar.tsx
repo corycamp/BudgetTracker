@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavigationLinks } from "../common/constants";
 import logo from "./assets/logo.svg";
-import bell from "./assets/bell.svg";
 import avatar from "./assets/avatar.svg";
 import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { NavbarLink } from "../common/interfaces";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

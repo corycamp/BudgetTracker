@@ -1,7 +1,7 @@
 "use client";
 
 import Table from "@/components/ui/Table";
-import { TransactionsText } from "../../components/common/constants";
+import { TableText, TransactionsText } from "../../components/common/constants";
 import PageProvier from "../../components/ui/PageProvider";
 import ExpenseForm from "./_components/ExpenseForm";
 
@@ -27,7 +27,24 @@ const Transactions = () => {
                 Recent Expenses
               </h1>
             </div>
-            <Table />
+            <Table
+              header={Object.values(TableText.headers.expenses)}
+              emptyValue={"No Recent Expenses"}
+              data={[
+                {
+                  date: "test",
+                  category: "Shopping",
+                  merchant: "Test merchant",
+                  amount: "0.00",
+                },
+                {
+                  date: "test",
+                  category: "Shopping",
+                  merchant: "Test merchant",
+                  amount: "0.00",
+                },
+              ]}
+            />
           </div>
         </div>
       </div>

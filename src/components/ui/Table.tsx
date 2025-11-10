@@ -1,45 +1,54 @@
-const Table = () => {
-  const hasValue = true;
-  const title = "Recent Transactions";
-  const emptyValue = "No recent transactions";
+import {
+  ExpenseTableItem,
+  RecentTransactionsTableItem,
+  TableProps,
+} from "../common/interfaces";
+
+const Table = (props: TableProps) => {
+  const { title, header, emptyValue, data } = props;
 
   const tableHeader = () => {
     return (
       <div className="flex flex-row w-full justify-between mb-3">
-        <h3>Date</h3>
-        <h3>Description</h3>
-        <h3>Category</h3>
-        <h3>Amount</h3>
+        {header?.map((item) => (
+          <h3 key={item}>{item}</h3>
+        ))}
       </div>
     );
   };
 
-  const tableItem = () => {
+  const tableItem = (item: (typeof data)[0]) => {
     return (
-      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 pb-2">
-        <h3>Date</h3>
-        <h3>Description</h3>
-        <h3>Category</h3>
-        <h3>Amount</h3>
+      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 ">
+        {Object.values(item).map((item: string) => (
+          <div key={item}>
+            <h3>{item.replace(/^(.{10}).*$/, "$1")}</h3>
+          </div>
+        ))}
       </div>
     );
   };
 
-  const itemCard = (index: number) => (
+  const itemCard = (
+    item: ExpenseTableItem | RecentTransactionsTableItem,
+    index: number
+  ) => (
     <div
       className={`flex flex-row w-full justify-between ${
         index != 0 && "border-t-1"
       } pb-3 pt-3 border-t-gray-300`}
     >
       <div className="flex flex-col">
-        <h3>Grocery Shopping</h3>
-        <h5>2025-09-16</h5>
+        <h3>{"description" in item ? item.description : item.merchant}</h3>
+        <h5>{item.date}</h5>
       </div>
-      <div className="flex flex-row items-center">
-        <h3 className="flex text-[15px] rounded-4xl bg-gray-100 min-w-15 p-2 justify-center max-w-15">
-          Food
-        </h3>
-        <h3 className="text-[20px] text-red-400 ml-5">-$150</h3>
+      <div className="flex flex-row items-center ml-2">
+        <div className="flex flex-wrap rounded-4xl bg-gray-100 min-w-15 p-2 justify-center">
+          <h3 className="text-[15px]">
+            {item.category.replace(/^(.{5}).*$/, "$1")}
+          </h3>
+        </div>
+        <h3 className="text-[20px] text-red-400 ml-5">{item.amount}</h3>
       </div>
     </div>
   );
@@ -47,10 +56,10 @@ const Table = () => {
   const mobileTableItem = () => {
     return (
       <div className="flex flex-col lg:hidden">
-        {Array.from({ length: 5 }, (_i, index) => {
+        {data.map((item, index) => {
           return (
             <div key={index} className="flex flex-row w-full">
-              {itemCard(index)}
+              {itemCard(item, index)}
             </div>
           );
         })}
@@ -62,10 +71,10 @@ const Table = () => {
     return (
       <div className="hidden lg:flex flex-col">
         <div className="flex flex-row w-full">{tableHeader()}</div>
-        {Array.from({ length: 5 }, (_i, index) => {
+        {data?.map((item, index) => {
           return (
             <div key={index} className="flex flex-row w-full">
-              {tableItem()}
+              {tableItem(item)}
             </div>
           );
         })}
@@ -75,10 +84,12 @@ const Table = () => {
 
   return (
     <div className="flex flex-col mb-10 p-10 lg:w-full bg-white border-1 border-gray-300 rounded-4xl max-h-155 overflow-auto">
-      <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold mb-6">
-        {title}
-      </h1>
-      {hasValue ? (
+      {title && (
+        <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold mb-6">
+          {title}
+        </h1>
+      )}
+      {!!data.length ? (
         <div>
           {desktopTableItem()}
           {mobileTableItem()}
