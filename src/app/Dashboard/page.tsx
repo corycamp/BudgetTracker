@@ -1,11 +1,11 @@
 "use client";
 
-import { DashboardText } from "../common/constants";
-import Card from "../components/Card";
-import PageProvier from "../components/PageProvider";
-import avatar from "../assets/avatar.svg";
-import SummaryCard from "../components/SummaryCard";
-import RecentTransactions from "../components/RecentTransactions";
+import { DashboardText } from "../../components/common/constants";
+import Card from "./_components/Card";
+import PageProvier from "../../components/ui/PageProvider";
+import avatar from "../../components/ui/assets/avatar.svg";
+import SummaryCard from "./_components/SummaryCard";
+import RecentTransactions from "./_components/RecentTransactions";
 
 const Dashboard = () => {
   const test = [
