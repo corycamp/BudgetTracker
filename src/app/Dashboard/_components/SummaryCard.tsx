@@ -8,13 +8,13 @@ const SummaryCard = () => {
   const [open, setOpen] = React.useState<boolean>(true);
   return (
     <div
-      className={`flex flex-col mb-10 p-10 lg:w-49/100 bg-white border-1 border-gray-300 rounded-4xl max-h-155 ${
+      className={`flex flex-col mb-10 p-10 lg:w-49/100 bg-[#23262D] rounded-4xl max-h-155 ${
         !open && "h-30 overflow-hidden"
       } overflow-auto`}
     >
       <div className="flex flex-row w-full justify-between items-start">
         <h1
-          className={`text-[20px] sm:text-[25px] md:text-[30px] font-bold ${
+          className={`text-[20px] sm:text-[25px] md:text-[30px] font-bold text-white ${
             open ? "mb-10" : "mb-0"
           }`}
         >

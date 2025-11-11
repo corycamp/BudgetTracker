@@ -1,3 +1,5 @@
+import { InputFieldProps } from "../common/interfaces";
+
 const InputField = (props: InputFieldProps) => {
   const {
     id,
@@ -13,7 +15,7 @@ const InputField = (props: InputFieldProps) => {
     <div>
       <label
         htmlFor="price"
-        className="block text-sm/6 font-medium text-gray-900"
+        className="block text-sm/6 font-medium text-white"
       >
         {title}
       </label>
@@ -30,14 +32,14 @@ const InputField = (props: InputFieldProps) => {
               type="text"
               name={id}
               placeholder={placeholder}
-              className={`block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
+              className={`block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
             />
           ) : (
             <textarea
               id={id}
               name={id}
               placeholder={placeholder}
-              className={`block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 ${customInputClass}`}
+              className={`block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6 ${customInputClass}`}
             />
           )}
           {showSelection && (

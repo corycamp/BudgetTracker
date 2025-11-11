@@ -24,12 +24,12 @@ const Navbar = () => {
   }, [isOpen]);
 
   const desktopNavBar = () => (
-    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-b-gray-300 bg-white justify-between items-center sticky top-0">
+    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-b-gray-100 bg-[#0D0F14] justify-between items-center sticky top-0">
       <div className="w-auto flex">
         <Link href={`/Dashboard`}>
           <div className="flex flex-row items-center">
             <Image src={logo} alt={"Logo"} width={50} />
-            <h1 className="ml-2 text-[20px] font-medium">BudgetTracker</h1>
+            <h1 className="ml-2 text-[20px] font-medium text-white">BudgetTracker</h1>
           </div>
         </Link>
       </div>
@@ -42,7 +42,7 @@ const Navbar = () => {
                 "ml-10 flex w-auto text-[19px] font-medium",
                 !pathname.includes(item.toLowerCase())
                   ? "text-gray-400"
-                  : "text-black"
+                  : "text-white"
               )}
             >
               <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`}>
@@ -53,7 +53,7 @@ const Navbar = () => {
         })}
       </div>
       <div className="w-auto flex justify-end-safe">
-        <div className="flex border rounded-4xl p-2">
+        <div className="flex border rounded-4xl p-2 bg-white">
           <Link href={`/Account`}>
             <Image src={avatar} alt={"Avatar"} width={20} />
           </Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
     <nav
       className={`flex flex-row lg:hidden h-16 ${
         isOpen && "h-full"
-      } w-full border-b-1 border-b-gray-300 bg-white justify-between fixed top-0`}
+      } w-full border-b-1 border-b-gray-300 bg-white justify-between fixed top-0 z-100`}
     >
       <div className="flex flex-col w-full pr-10 pl-10 mt-2">
         <div className="flex flex-row w-full">

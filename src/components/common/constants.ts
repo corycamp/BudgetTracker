@@ -16,6 +16,16 @@ export const TransactionsText={
     subHeading:"Keep track of any purchases made"
 }
 
+export const BudgetText={
+    heading:"Budget",
+    subHeading:"Create a budget to track spending"
+}
+
+export const ReportText={
+    heading:"Reports",
+    subHeading:"Analyze your financial data"
+}
+
 export const TableText = {
     titles:{
         expenses: "Recent Expenses",

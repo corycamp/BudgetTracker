@@ -9,7 +9,7 @@ const Table = (props: TableProps) => {
 
   const tableHeader = () => {
     return (
-      <div className="flex flex-row w-full justify-between mb-3">
+      <div className="flex flex-row w-full justify-between mb-3 text-white">
         {header?.map((item) => (
           <h3 key={item}>{item}</h3>
         ))}
@@ -19,7 +19,7 @@ const Table = (props: TableProps) => {
 
   const tableItem = (item: (typeof data)[0]) => {
     return (
-      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 ">
+      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 text-white">
         {Object.values(item).map((item: string) => (
           <div key={item}>
             <h3>{item.replace(/^(.{10}).*$/, "$1")}</h3>
@@ -83,9 +83,9 @@ const Table = (props: TableProps) => {
   };
 
   return (
-    <div className="flex flex-col mb-10 p-10 lg:w-full bg-white border-1 border-gray-300 rounded-4xl max-h-155 overflow-auto">
+    <div className="flex flex-col mb-10 p-10 lg:w-full bg-[#23262D] rounded-4xl max-h-155 overflow-auto">
       {title && (
-        <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold mb-6">
+        <h1 className="text-[20px] sm:text-[25px] md:text-[30px] font-bold mb-6 text-white">
           {title}
         </h1>
       )}
