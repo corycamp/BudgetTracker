@@ -1,5 +1,12 @@
-export type NavbarLink = "Dashboard" | "Transactions" | "Budget" | "Reports";
-
+export type NavbarLink = "Dashboard" | "Transactions" | "Budget";
+export type expenseCategory =
+  | "Food"
+  | "Shopping"
+  | "Transportation"
+  | "Housing"
+  | "Entertainment"
+  | "Utilities"
+  | "Other";
 export interface PageProviderProps {
   pageName: string;
   pageSubHeading?: string;
@@ -8,7 +15,6 @@ export interface PageProviderProps {
 }
 
 export interface CardProps {
-  imageSrc: string;
   title: string;
   amount: number;
 }
@@ -43,4 +49,14 @@ export interface TableProps {
   header: string[];
   emptyValue: string;
   data: ExpenseTableItem[] | RecentTransactionsTableItem[];
+}
+
+export interface SpentItemProps {
+  merchant: string;
+  category: expenseCategory;
+  amount: string;
+}
+
+export interface SpentItemsProps {
+  data: SpentItemProps[];
 }

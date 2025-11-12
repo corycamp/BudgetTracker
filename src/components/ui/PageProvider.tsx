@@ -1,3 +1,5 @@
+import { PageProviderProps } from "../common/interfaces";
+
 const PageProvier = (props: PageProviderProps) => {
   const { pageName, pageSubHeading, customButton } = props;
 
@@ -5,9 +7,9 @@ const PageProvier = (props: PageProviderProps) => {
     <div className="pl-10 pr-10">
       <div className="flex flex-row pt-5 mb-10 mt-15 lg:mt-0">
         <div className="w-full md:w-1/2 flex flex-col">
-          <h1 className="text-[35px] font-bold">{pageName}</h1>
+          <h1 className="text-[35px] font-bold text-white">{pageName}</h1>
           {!!pageSubHeading && (
-            <p className="text-[19px] text-gray-500 font-medium">
+            <p className="text-[19px] text-white font-medium">
               {pageSubHeading}
             </p>
           )}

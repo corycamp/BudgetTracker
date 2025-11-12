@@ -1,9 +1,10 @@
+import { Bus, House, Lightbulb, List, Popcorn, ShoppingBag, Utensils } from "lucide-react"
+import { expenseCategory } from "./interfaces"
 
 export const NavigationLinks = {
     Dashboard:"Dashboard",
     Transactions:"Transactions",
     Budget:"Budget",
-    Reports:"Reports"
 }
 
 export const DashboardText={
@@ -14,6 +15,16 @@ export const DashboardText={
 export const TransactionsText={
     heading:"Transactions",
     subHeading:"Keep track of any purchases made"
+}
+
+export const BudgetText={
+    heading:"Budget",
+    subHeading:"Create a budget to track spending"
+}
+
+export const ReportText={
+    heading:"Reports",
+    subHeading:"Analyze your financial data"
 }
 
 export const TableText = {
@@ -36,3 +47,26 @@ export const TableText = {
         },
     }
 }
+
+export const iconMapping =(iconType:expenseCategory)=>{
+    switch(iconType){
+        case "Food":
+            return Utensils
+        case "Shopping":
+            return ShoppingBag
+        case "Transportation":
+            return Bus
+        case "Housing":
+            return House
+        case "Entertainment":
+            return Popcorn
+        case "Utilities":
+            return Lightbulb
+        case "Other":
+            return List
+        default:
+            return List
+    }
+}
+
+export const COLORS = ["#4ade80", "#22c55e", "#14532d"];

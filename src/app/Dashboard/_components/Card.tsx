@@ -1,17 +1,18 @@
-import Image from "next/image";
+import { CardProps } from "@/components/common/interfaces";
+import { Banknote } from "lucide-react";
 
 const Card = (props: CardProps) => {
-  const { imageSrc, title, amount } = props;
+  const { title, amount } = props;
   return (
-    <div className="bg-white flex flex-col mb-5 md:w-16/50 h-40 border-1 border-gray-300 rounded-xl p-4 justify-center shadow-sm">
+    <div className="bg-[#1C1E24] flex flex-col mb-5 md:w-16/50 h-40 rounded-xl p-4 justify-center shadow-sm">
       <div className="flex flex-row items-center w-full mb-5">
-        <div className="border-1 rounded-4xl p-2">
-          <Image src={imageSrc} alt={"Card Icon"} width={30} />
+        <div>
+          <Banknote className="text-green-400 w-8 h-8"/>
         </div>
-        <h2 className="text-[15px] ml-4 font-medium">{title}</h2>
+        <h2 className="text-[15px] ml-4 font-medium text-white">{title}</h2>
       </div>
       <div>
-        <h1 className="text-[30px] font-bold">{`$${amount}`}</h1>
+        <h1 className="text-[30px] font-bold text-white">{`$${amount}`}</h1>
       </div>
     </div>
   );

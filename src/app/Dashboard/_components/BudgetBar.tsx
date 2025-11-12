@@ -6,7 +6,7 @@ const BudgetBar = () => {
   return (
     <div className="flex flex-col mb-5">
       <div className="flex flex-row mb-4 items-center justify-between">
-        <h2 className="text-[20px] font-medium">Food Budget</h2>
+        <h2 className="text-[20px] font-medium text-white">Food Budget</h2>
         <h3 className="text-[18px] font-medium text-green-400">{`${percent}%`}</h3>
       </div>
       {/* Progress bar */}
