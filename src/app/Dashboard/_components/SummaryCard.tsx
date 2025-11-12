@@ -1,15 +1,13 @@
 import React from "react";
 import BudgetBar from "./BudgetBar";
-import Image from "next/image";
-import chevronDown from "../../../components/ui/assets/chevronDown.svg";
-import chevronUp from "../../../components/ui/assets/chevronUp.svg";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const SummaryCard = () => {
   const [open, setOpen] = React.useState<boolean>(true);
   return (
     <div
-      className={`flex flex-col mb-10 p-10 lg:w-49/100 bg-[#23262D] rounded-4xl max-h-155 ${
-        !open && "h-30 overflow-hidden"
+      className={`flex flex-col mb-10 p-10 lg:w-49/100 bg-[#1C1E24] rounded-4xl max-h-155 ${
+        !open && "lg:h-30 overflow-hidden"
       } overflow-auto`}
     >
       <div className="flex flex-row w-full justify-between items-start">
@@ -21,12 +19,11 @@ const SummaryCard = () => {
           Budget Summary
         </h1>
         <button onClick={() => setOpen(!open)}>
-          <Image
-            src={open ? chevronUp : chevronDown}
-            width={25}
-            alt={"Budget Summary chevron"}
-            className="mt-2"
-          />
+          {!open ? (
+            <ChevronDown className="text-white w-10 h-10" />
+          ) : (
+            <ChevronUp className="text-white w-10 h-10" />
+          )}
         </button>
       </div>
       {open ? <BudgetBar /> : null}

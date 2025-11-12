@@ -24,12 +24,14 @@ const Navbar = () => {
   }, [isOpen]);
 
   const desktopNavBar = () => (
-    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-b-gray-100 bg-[#0D0F14] justify-between items-center sticky top-0">
+    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-white bg-[#0D0F14] justify-between items-center sticky top-0">
       <div className="w-auto flex">
         <Link href={`/Dashboard`}>
           <div className="flex flex-row items-center">
             <Image src={logo} alt={"Logo"} width={50} />
-            <h1 className="ml-2 text-[20px] font-medium text-white">BudgetTracker</h1>
+            <h1 className="ml-2 text-[20px] font-medium text-white">
+              BudgetTracker
+            </h1>
           </div>
         </Link>
       </div>
@@ -42,7 +44,7 @@ const Navbar = () => {
                 "ml-10 flex w-auto text-[19px] font-medium",
                 !pathname.includes(item.toLowerCase())
                   ? "text-gray-400"
-                  : "text-white"
+                  : "text-green-500"
               )}
             >
               <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`}>
@@ -66,7 +68,7 @@ const Navbar = () => {
     <nav
       className={`flex flex-row lg:hidden h-16 ${
         isOpen && "h-full"
-      } w-full border-b-1 border-b-gray-300 bg-white justify-between fixed top-0 z-100`}
+      } w-full border-b-1 border-b-white bg-[#0D0F14] justify-between fixed top-0 z-100`}
     >
       <div className="flex flex-col w-full pr-10 pl-10 mt-2">
         <div className="flex flex-row w-full">
@@ -74,14 +76,14 @@ const Navbar = () => {
             <Link href={`/Dashboard`}>
               <div className="flex flex-row items-center">
                 <Image src={logo} alt={"Logo"} width={50} />
-                <h1 className="ml-2 text-[18px] sm:text-[20px] font-medium">
+                <h1 className="ml-2 text-[18px] sm:text-[20px] font-medium text-white">
                   BudgetTracker
                 </h1>
               </div>
             </Link>
           </div>
           <div className="w-full h-10 flex justify-end-safe">
-            <div className="flex mr-3 border rounded-4xl p-2 cursor-pointer">
+            <div className="flex mr-3 border rounded-4xl p-2 cursor-pointer bg-white">
               <Link href={`/Account`}>
                 <Image src={avatar} alt={"Avatar"} width={20} />
               </Link>
@@ -91,9 +93,18 @@ const Navbar = () => {
                 className="flex flex-col justify-center items-center w-7 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <span className="w-full border-black h-0 border-2 mb-1" />
-                <span className="w-full border-black h-0 border-2 mb-1" />
-                <span className="w-full border-black h-0 border-2" />
+                {!isOpen ? (
+                  <div className="flex flex-col h-6 justify-between w-full">
+                    <span className="w-full border-white h-0 border-2 mb-1" />
+                    <span className="w-full border-white h-0 border-2 mb-1" />
+                    <span className="w-full border-white h-0 border-2" />
+                  </div>
+                ) : (
+                  <div className="flex flex-col h-6 justify-between w-full mt-1">
+                    <span className="w-full border-white bg-white h-0 border-2 mb-1 rotate-45 translate-y-2" />
+                    <span className="w-full border-white bg-white h-0 border-2 mb-1 rotate-135 -translate-y-2" />
+                  </div>
+                )}
               </button>
             </div>
           </div>
@@ -108,7 +119,7 @@ const Navbar = () => {
                     "flex w-auto text-[19px] font-medium mt-3 mb-3 border-b-1 border-gray-200",
                     !pathname.includes(item.toLowerCase())
                       ? "text-gray-400"
-                      : "text-black"
+                      : "text-white"
                   )}
                 >
                   <Link

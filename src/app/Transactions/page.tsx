@@ -13,7 +13,7 @@ const Transactions = () => {
     >
       <div className="flex flex-col lg:flex-row w-full h-full">
         <div className="flex flex-col lg:flex-row w-full justify-between gap-20">
-          <div className="flex-1 bg-[#23262D] rounded-4xl p-5">
+          <div className="flex-1 bg-[#1C1E24] rounded-4xl p-5">
             <div className="mb-10">
               <h1 className="text-[20px] sm:text-[25px] md:text-[25px] font-bold text-white">
                 Add Expense
