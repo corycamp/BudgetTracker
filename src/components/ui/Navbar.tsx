@@ -9,6 +9,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { NavbarLink } from "../common/interfaces";
+import { User } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -43,11 +44,13 @@ const Navbar = () => {
               className={clsx(
                 "ml-10 flex w-auto text-[19px] font-medium",
                 !pathname.includes(item.toLowerCase())
-                  ? "text-gray-400"
+                  ? "text-gray-400 hover:text-white"
                   : "text-green-500"
               )}
             >
-              <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`}>
+              <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`} className={clsx(!pathname.includes(item.toLowerCase())
+                  ? "hover:cursor-pointer"
+                  : "cursor-default")}>
                 {item}
               </Link>
             </div>
@@ -55,11 +58,7 @@ const Navbar = () => {
         })}
       </div>
       <div className="w-auto flex justify-end-safe">
-        <div className="flex border rounded-4xl p-2 bg-white">
-          <Link href={`/Account`}>
-            <Image src={avatar} alt={"Avatar"} width={20} />
-          </Link>
-        </div>
+        <User className="text-white bg-gray-600 rounded-4xl w-9 h-9 p-1"/>
       </div>
     </nav>
   );

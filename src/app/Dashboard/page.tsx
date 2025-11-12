@@ -1,48 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { DashboardText } from "../../components/common/constants";
-import Card from "./_components/Card";
 import PageProvier from "../../components/ui/PageProvider";
-import avatar from "../../components/ui/assets/avatar.svg";
-import SummaryCard from "./_components/SummaryCard";
-import RecentTransactions from "./_components/RecentTransactions";
+import Overview from "./_components/Overview";
+import Reports from "./_components/Reports";
 
 const Dashboard = () => {
-  const test = [
-    {
-      amount: 5000,
-      category: "Total Income",
-    },
-    {
-      amount: 3500,
-      category: "Total Expenses",
-    },
-    {
-      amount: 1500,
-      category: "Net Savings",
-    },
-  ];
+  const [selectedTab, setSelectedTab] = useState<"Overview" | "Report">("Overview");
+
+  const handleTabSelection = (choice:"Overview" | "Report")=> selectedTab == choice ? "pb-2 border-b-2 border-green-500 text-green-500" : "pb-2 border-b-2 border-transparent text-gray-400 hover:text-white hover:cursor-pointer"
 
   return (
     <PageProvier
       pageName={DashboardText.heading}
       pageSubHeading={DashboardText.subHeading}
     >
-      <div className="flex flex-col md:flex-row justify-between">
-        {test.map((item, index) => {
-          return (
-            <Card
-              key={index}
-              imageSrc={avatar}
-              title={item.category}
-              amount={item.amount}
-            />
-          );
-        })}
-      </div>
-      <div className="flex flex-col lg:flex-row mt-10 justify-between">
-        <SummaryCard />
-        <RecentTransactions />
+      <div>
+        <div>
+          <div className="flex gap-8 border-b border-gray-700 mb-8">
+            <button className={handleTabSelection("Overview")} onClick={()=>{selectedTab != "Overview" && setSelectedTab("Overview")}}>
+              Overview
+            </button>
+            <button className={handleTabSelection("Report")} onClick={()=>{selectedTab != "Report" && setSelectedTab("Report")}}>
+              Report
+            </button>
+          </div>
+        </div>
+      {selectedTab == "Overview" ? <Overview/> : <Reports/>}
       </div>
     </PageProvier>
   );

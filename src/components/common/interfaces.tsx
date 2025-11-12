@@ -1,4 +1,4 @@
-export type NavbarLink = "Dashboard" | "Transactions" | "Budget" | "Reports";
+export type NavbarLink = "Dashboard" | "Transactions" | "Budget";
 export type expenseCategory =
   | "Food"
   | "Shopping"
@@ -15,7 +15,6 @@ export interface PageProviderProps {
 }
 
 export interface CardProps {
-  imageSrc: string;
   title: string;
   amount: number;
 }
