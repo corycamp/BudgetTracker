@@ -9,12 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@apollo/server": "^5.1.0",
-    "@as-integrations/next": "^4.1.0",
+    "@apollo/server": "^4.0.0",
+    "@as-integrations/next": "^3.0.0",
+    "@yaacovcr/transform": "^0.0.3",
     "apollo-server-micro": "^3.13.0",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "graphql": "^16.12.0",
+    "graphql": "^16.0.0",
     "lucide-react": "^0.553.0",
     "mongodb": "^7.0.0",
     "next": "15.5.3",
@@ -33,5 +35,11 @@
     "eslint-config-next": "15.5.3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "graphql": "^16.0.0"
+  },
+  "resolutions": {
+    "graphql": "^16.0.0"
   }
 }

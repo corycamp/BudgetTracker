@@ -1,11 +1,10 @@
-import { getAppModule } from "../appModule/provider";
-import { BudgetService } from "../services/budgetService";
+// import { getAppModule } from "../appModule/provider";
+import { BudgetService } from "../services/BudgetService";
 
 export class BudgetController{
     private budgetService:BudgetService
-    constructor(){
-        console.log("Setting up controller")
-        this.budgetService = getAppModule().budgetService;
+    constructor(budgetService:BudgetService){
+        this.budgetService = budgetService;
     }
 
         async getAllBudgets(){

@@ -1,4 +1,4 @@
-import { AppModule } from "./appModule";
+import { AppModule } from "./AppModule";
 
 let appModuleInstance: AppModule|null = null;
 

@@ -1,19 +1,26 @@
+import { MongoDB } from "../db/mongodb";
 
 interface budget{
+    _id:number;
     category:string;
     limit:number;
 }
 
 export class BudgetService{
-    constructor(){
-        console.log("Setting up budget service")
+    private db;
+    constructor(db:MongoDB){
+        this.db = db;
     }
 
     async getAllBudgets():Promise<budget[]>{
-        return [{
-            category:"test",
-            limit:200
-        }]
+        try{
+            const budgets = await this.db.getCollection("budgets").find({}).toArray();
+            return budgets as unknown as budget[];
+        }catch(e){
+            console.log("Error connecting to database", e);
+            return []
+        }
+        
     }
 
 }

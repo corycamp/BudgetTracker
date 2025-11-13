@@ -4,16 +4,17 @@ import { getAppModule } from "../appModule/provider";
 export const typeDefs = gql`
     type Budget{
         category: String
-        limit: Number
+        limit: Float
     }
 
     type Query{
+        test: String!
         getAllBudgets: [Budget]
     }
 `;
 
 export const resolvers = {
     Query:{
-        getAllBudgets:()=>getAppModule().budgetService.getAllBudgets()
+        getAllBudgets:()=>getAppModule().budgetController.getAllBudgets(),
     }
 }
