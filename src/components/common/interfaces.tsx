@@ -60,3 +60,13 @@ export interface SpentItemProps {
 export interface SpentItemsProps {
   data: SpentItemProps[];
 }
+
+export interface User {
+  user:
+    | {
+        name?: string | null | undefined;
+        email?: string | null | undefined;
+        image?: string | null | undefined;
+      }
+    | undefined;
+}
