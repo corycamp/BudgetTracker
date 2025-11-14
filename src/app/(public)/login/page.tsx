@@ -3,6 +3,7 @@ import AuthCard from "@/components/ui/AuthCard";
 import FeatureCard from "@/components/ui/FeatureCard";
 import { FaWallet, FaChartLine } from "react-icons/fa";
 import { PiPiggyBank } from "react-icons/pi";
+import { FeatureCardText } from "@/components/common/constants";
 
 export default function Home() {
   return (
@@ -39,19 +40,19 @@ export default function Home() {
           <FeatureCard
             icon={<FaWallet className="text-blue-400" size={32} />}
             title="Track Spending"
-            description="Effortlessly monitor where your money goes. Connect your accounts and see all your transactions in one place."
+            description={FeatureCardText.TrackSpending}
           />
 
           <FeatureCard
             icon={<PiPiggyBank className="text-green-400" size={32} />}
             title="Create Budgets"
-            description="Set realistic budgets you can stick to. We'll help you stay on track and notify you when you're nearing your limits."
+            description={FeatureCardText.PiggyBank}
           />
 
           <FeatureCard
             icon={<FaChartLine className="text-orange-400" size={32} />}
             title="Visualize Finances"
-            description="Understand your financial health with insightful charts and graphs. Make informed decisions with your data."
+            description={FeatureCardText.Reports}
           />
         </div>
       </section>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavigationLinks } from "../common/constants";
 import logo from "./assets/logo.svg";
-import avatar from "./assets/avatar.svg";
 import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -45,6 +44,28 @@ const Navbar = ({ user }: UserInterface) => {
 
   const handleAccountIconClicked = () => setShowDropdown(!showDropdown);
 
+  const avatarIcon = () => {
+    return (
+      <div>
+        {!!user?.image ? (
+          <Image
+            className="rounded-4xl hover:cursor-pointer"
+            src={user.image}
+            alt={"Profile picture"}
+            width={35}
+            height={35}
+            onClick={handleAccountIconClicked}
+          />
+        ) : (
+          <User
+            className="text-white bg-gray-600 rounded-4xl w-9 h-9 p-1 hover:cursor-pointer"
+            onClick={handleAccountIconClicked}
+          />
+        )}
+      </div>
+    );
+  };
+
   const desktopNavBar = () => (
     <nav className="hidden lg:flex flex-row h-16 w-full border-b pl-10 pr-10 border-white bg-[#0D0F14] justify-between items-center sticky top-0">
       <div className="w-auto flex">
@@ -84,21 +105,7 @@ const Navbar = ({ user }: UserInterface) => {
         })}
       </div>
       <div className="w-auto flex justify-end-safe relative" ref={dropdownRef}>
-        {!!user?.image ? (
-          <Image
-            className="rounded-4xl"
-            src={user.image}
-            alt={"Profile picture"}
-            width={35}
-            height={35}
-            onClick={handleAccountIconClicked}
-          />
-        ) : (
-          <User
-            className="text-white bg-gray-600 rounded-4xl w-9 h-9 p-1"
-            onClick={handleAccountIconClicked}
-          />
-        )}
+        {avatarIcon()}
         {showDropdown && (
           <div className="absolute w-30 left-0 -translate-x-14 mt-13 bg-gray-600 rounded-xl p-3 shadow-xl">
             <svg
@@ -132,7 +139,7 @@ const Navbar = ({ user }: UserInterface) => {
     <nav
       className={`flex flex-row lg:hidden h-16 ${
         isOpen && "h-full"
-      } w-full border-b-1 border-b-white bg-[#0D0F14] justify-between fixed top-0 z-100`}
+      } w-full border-b border-b-white bg-[#0D0F14] justify-between fixed top-0 z-100`}
     >
       <div className="flex flex-col w-full pr-10 pl-10 mt-2">
         <div className="flex flex-row w-full">
@@ -148,9 +155,7 @@ const Navbar = ({ user }: UserInterface) => {
           </div>
           <div className="w-full h-10 flex justify-end-safe">
             <div className="flex mr-3 border rounded-4xl p-2 cursor-pointer bg-white">
-              <Link href={`/Account`}>
-                <Image src={avatar} alt={"Avatar"} width={20} />
-              </Link>
+              {avatarIcon()}
             </div>
             <div className="flex">
               <button
@@ -180,7 +185,7 @@ const Navbar = ({ user }: UserInterface) => {
                 <div
                   key={item}
                   className={clsx(
-                    "flex w-auto text-[19px] font-medium mt-3 mb-3 border-b-1 border-gray-200",
+                    "flex w-auto text-[19px] font-medium mt-3 mb-3 border-b border-gray-200",
                     !pathname.includes(item.toLowerCase())
                       ? "text-gray-400"
                       : "text-white"

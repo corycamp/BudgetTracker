@@ -1,6 +1,9 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
+import { MongoDB } from "@/server/db/mongodb";
+import { User } from "@/lib/types";
+import bcrypt from "bcryptjs";
 
 export const authOptions:AuthOptions={
     providers:[
@@ -15,13 +18,18 @@ export const authOptions:AuthOptions={
                 password:{label:"Password", type:"password"}
             },
             async authorize(credentials:any){
-                if(
-                    credentials?.email === "test@example.com" &&
-                    credentials?.password === "password"
-                ){
-                    return {id: '1', name:"Test User", email: "test@example.com"}
+                const client = new MongoDB();
+                await client.connect();
+                const user = await client.getCollection<User>("users").findOne({email: credentials.email});
+                if(!user) return null;
+
+                const valid = await bcrypt.compare(credentials.password, user.hashedPassword);
+                if(!valid) return null;
+
+                return{
+                    id:user._id.toString(),
+                    email: user.email
                 }
-                return null
             },
         }),
     ],

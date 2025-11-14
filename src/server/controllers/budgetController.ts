@@ -1,5 +1,4 @@
-// import { getAppModule } from "../appModule/provider";
-import { Budget, CreateBudget, UpdateBudget } from "@/lib/types";
+import { CreateBudget, UpdateBudget } from "@/lib/types";
 import { BudgetService } from "../services/BudgetService";
 
 export class BudgetController{
