@@ -18,7 +18,11 @@ const TrendsTable = () => {
           Last 6 Months
         </span>
       </div>
-      <ResponsiveContainer width="100%" height={250}>
+      <ResponsiveContainer
+        width="100%"
+        height={250}
+        className="focus:outline-none focus:ring- outline-none"
+      >
         <LineChart data={spendingTrendData}>
           <XAxis dataKey="month" stroke="#9CA3AF" />
           <Tooltip

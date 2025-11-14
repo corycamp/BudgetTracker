@@ -1,3 +1,5 @@
+import { CATEGORYLIST } from "@/components/common/constants";
+import Dropdown from "@/components/ui/Dropdown";
 import InputField from "@/components/ui/InputField";
 
 const ExpenseForm = () => {
@@ -12,21 +14,17 @@ const ExpenseForm = () => {
               title={"Amount"}
               placeholder={"0.00"}
               frontAdornment={"$"}
-              showSelection
-              options={["USD", "CAD", "EUR"]}
             />
           </div>
           <div className="flex-1 flex-col">
             <InputField id={"Date"} title={"Date"} placeholder={"mm/dd/yyyy"} />
           </div>
         </div>
-        {/* Category */}
         <div className="flex flex-col w-full mt-2">
-          <InputField
-            id={"Category"}
-            title={"Category"}
-            placeholder={"Select a category"}
-          />
+          <label className="block text-sm/6 font-medium text-white mb-2">
+            Category
+          </label>
+          <Dropdown options={CATEGORYLIST} onSelect={() => {}} />
         </div>
         {/* Merchant */}
         <div className="flex flex-col w-full mt-2">
@@ -50,7 +48,7 @@ const ExpenseForm = () => {
         <div className="flex md:items-start mt-5">
           <div className="w-full">
             <button
-              className="shadow w-full lg:w-auto bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hover:cursor-pointer"
+              className="shadow w-full lg:w-auto bg-green-700 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hover:cursor-pointer"
               type="submit"
             >
               Add Expense

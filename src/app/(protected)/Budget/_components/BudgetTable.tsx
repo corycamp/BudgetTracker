@@ -1,3 +1,5 @@
+import { Budgets } from "@/components/common/interfaces";
+import { NotebookPen, Trash } from "lucide-react";
 import {
   ReactElement,
   JSXElementConstructor,
@@ -6,8 +8,14 @@ import {
   Key,
 } from "react";
 
-const BudgetTable = (props: any) => {
-  const { budgets } = props;
+interface BudgetTableProps {
+  budgets: Budgets[];
+  updateClick: () => void;
+  removeClick: () => void;
+}
+
+const BudgetTable = (props: BudgetTableProps) => {
+  const { budgets, updateClick, removeClick } = props;
   return (
     <div className="bg-[#1C1E24] rounded-2xl overflow-x-scroll lg:overflow-hidden">
       <table className="w-full text-left">
@@ -18,6 +26,7 @@ const BudgetTable = (props: any) => {
             <th className="py-3 px-6">Spent</th>
             <th className="py-3 px-6">Remaining</th>
             <th className="py-3 px-6">Progress</th>
+            <th className="py-3 px-6"></th>
             <th className="py-3 px-6"></th>
           </tr>
         </thead>
@@ -86,7 +95,12 @@ const BudgetTable = (props: any) => {
                       <span className="text-gray-300 text-sm">{percent}%</span>
                     </div>
                   </td>
-                  <td className="py-4 px-6 text-gray-400 cursor-pointer">⋮</td>
+                  <td className="py-4 pl-6 text-gray-400 cursor-pointer">
+                    <NotebookPen size={20} onClick={updateClick} />
+                  </td>
+                  <td className="text-gray-400 cursor-pointer">
+                    <Trash size={20} onClick={removeClick} />
+                  </td>
                 </tr>
               );
             }

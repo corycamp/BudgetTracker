@@ -76,3 +76,5 @@ export const iconMapping =(iconType:expenseCategory)=>{
 }
 
 export const COLORS = ["#4ade80", "#22c55e", "#14532d"];
+
+export const CATEGORYLIST = ["Food","Shopping","Transportation","Housing","Entertainment","Utilities","Other"]

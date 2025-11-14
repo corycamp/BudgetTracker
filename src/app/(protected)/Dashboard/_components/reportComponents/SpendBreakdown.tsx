@@ -17,7 +17,7 @@ const SpendBreakdown = () => {
       <h2 className="text-lg font-semibold mb-4 text-white">
         Spending Breakdown
       </h2>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center pointer-events-none">
         <ResponsiveContainer width="100%" height={200}>
           <PieChart>
             <Pie
@@ -27,7 +27,7 @@ const SpendBreakdown = () => {
               outerRadius={80}
               paddingAngle={4}
             >
-              {breakdownData.map((entry, index) => (
+              {breakdownData.map((_entry, index) => (
                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>

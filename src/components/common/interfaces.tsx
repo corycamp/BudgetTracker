@@ -7,6 +7,8 @@ export type expenseCategory =
   | "Entertainment"
   | "Utilities"
   | "Other";
+
+export type budgetOption = "createBudget" | "editBudget" | "confirmBudget";
 export interface PageProviderProps {
   pageName: string;
   pageSubHeading?: string;
@@ -59,6 +61,12 @@ export interface SpentItemProps {
 
 export interface SpentItemsProps {
   data: SpentItemProps[];
+}
+
+export interface Budgets {
+  category: string;
+  limit: number;
+  spent: number;
 }
 
 export interface User {

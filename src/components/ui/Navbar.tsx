@@ -121,9 +121,6 @@ const Navbar = ({ user }: UserInterface) => {
             >
               <polygon points="10,0 20,12 0,12" />
             </svg>
-            <div className="flex justify-center text-white mb-5 m-auto overflow-hidden">
-              <h2 className="break-all">Hello {user?.name?.split(" ")[0]}</h2>
-            </div>
             <button
               className="flex flew-row justify-center items-center w-full text-[16px] text-white hover:cursor-pointer hover:text-green-400"
               onClick={() => signOut({ callbackUrl: "/login" })}

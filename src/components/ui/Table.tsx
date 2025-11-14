@@ -7,35 +7,13 @@ import {
 const Table = (props: TableProps) => {
   const { title, header, emptyValue, data } = props;
 
-  const tableHeader = () => {
-    return (
-      <div className="flex flex-row w-full justify-between mb-3 text-white">
-        {header?.map((item) => (
-          <h3 key={item}>{item}</h3>
-        ))}
-      </div>
-    );
-  };
-
-  const tableItem = (item: (typeof data)[0]) => {
-    return (
-      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 text-white">
-        {Object.values(item).map((item: string) => (
-          <div key={item}>
-            <h3>{item.replace(/^(.{10}).*$/, "$1")}</h3>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   const itemCard = (
     item: ExpenseTableItem | RecentTransactionsTableItem,
     index: number
   ) => (
     <div
       className={`flex flex-row w-full justify-between ${
-        index != 0 && "border-t-1"
+        index != 0 && "border-t"
       } pb-3 pt-3 border-t-gray-300`}
     >
       <div className="flex flex-col">
@@ -71,15 +49,37 @@ const Table = (props: TableProps) => {
 
   const desktopTableItem = () => {
     return (
-      <div className="hidden lg:flex flex-col">
-        <div className="flex flex-row w-full">{tableHeader()}</div>
-        {data?.map((item, index) => {
-          return (
-            <div key={index} className="flex flex-row w-full">
-              {tableItem(item)}
-            </div>
-          );
-        })}
+      <div className="hidden lg:inline-block flex-col w-full">
+        <table className="w-full">
+          <thead className="text-gray-400 uppercase text-sm">
+            <tr className="text-center">
+              {header?.map((item) => (
+                <th className="py-3" key={item}>
+                  {item}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="border-t border-gray-700 hover:bg-[#2A2D35] transition text-center"
+                >
+                  {Object.values(item).map((insideItem: string, index) => (
+                    <td
+                      key={index}
+                      className="py-4 px-6 font-medium text-white"
+                    >
+                      {insideItem.replace(/^(.{100}).*$/, "$1")}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   };

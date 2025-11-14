@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import PageProvier from "@/components/ui/PageProvider";
 import { BudgetText } from "@/components/common/constants";
 import BudgetTable from "./_components/BudgetTable";
+import BudgetModal from "./_components/BudgetModal";
+import { budgetOption, Budgets } from "@/components/common/interfaces";
 
-const budgets = [
+const budgets: Budgets[] = [
   { category: "Food", limit: 500, spent: 350 },
   { category: "Shopping", limit: 200, spent: 180 },
   { category: "Transportation", limit: 300, spent: 100 },
@@ -17,17 +19,27 @@ const budgets = [
 ];
 
 const Budget = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [type, setType] = useState<budgetOption>("createBudget");
   const customButton = () => (
-    <button className="bg-green-500 text-black font-semibold p-4 py-2 rounded-full flex items-center lg:gap-2 hover:bg-green-400 transition">
+    <button
+      className="bg-green-500 text-black font-semibold p-4 py-2 rounded-full flex items-center lg:gap-2 hover:bg-green-400 transition hover:cursor-pointer"
+      onClick={() => {
+        setType("createBudget");
+        setOpen(!open);
+      }}
+    >
       <Plus className="w-4 h-4" /> New Budget
     </button>
   );
+
   return (
     <PageProvier
       pageName={BudgetText.heading}
       pageSubHeading={BudgetText.subHeading}
       customButton={customButton}
     >
+      <BudgetModal isOpen={open} onClose={() => setOpen(!open)} type={type} />
       {/* <div className="h-screen bg-[#0D0F14] text-white font-sans p-8"> */}
       <div className="pb-10 md:pb-0">
         {/* Current Budgets */}
@@ -35,7 +47,17 @@ const Budget = () => {
           <h2 className="text-lg font-semibold mb-4 text-white">
             Current Budgets
           </h2>
-          <BudgetTable budgets={budgets} />
+          <BudgetTable
+            budgets={budgets}
+            removeClick={() => {
+              setOpen(!open);
+              setType("confirmBudget");
+            }}
+            updateClick={() => {
+              setOpen(!open);
+              setType("editBudget");
+            }}
+          />
         </section>
 
         {/* Budget Alerts */}
