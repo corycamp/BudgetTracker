@@ -22,6 +22,10 @@ const Navbar = ({ user }: UserInterface) => {
   };
 
   useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     !isOpen
       ? document.body.classList.remove("overflow-hidden")
       : document.body.classList.add("overflow-hidden");
@@ -154,7 +158,7 @@ const Navbar = ({ user }: UserInterface) => {
             </Link>
           </div>
           <div className="w-full h-10 flex justify-end-safe">
-            <div className="flex mr-3 border rounded-4xl p-2 cursor-pointer bg-white">
+            <div className="flex mr-3 border items-center rounded-4xl p-2 cursor-pointer">
               {avatarIcon()}
             </div>
             <div className="flex">
@@ -188,7 +192,7 @@ const Navbar = ({ user }: UserInterface) => {
                     "flex w-auto text-[19px] font-medium mt-3 mb-3 border-b border-gray-200",
                     !pathname.includes(item.toLowerCase())
                       ? "text-gray-400"
-                      : "text-white"
+                      : "text-green-500"
                   )}
                 >
                   <Link
@@ -200,6 +204,17 @@ const Navbar = ({ user }: UserInterface) => {
                 </div>
               );
             })}
+            <div key={"logout"}>
+              <button
+                className="text-white mt-5"
+                onClick={() => signOut({ callbackUrl: "/login" })}
+              >
+                <div className="flex flew-row text-[20px]">
+                  <PiDoor className=" mr-1" size={30} />
+                  Logout
+                </div>
+              </button>
+            </div>
           </div>
         )}
       </div>

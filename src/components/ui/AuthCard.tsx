@@ -137,9 +137,6 @@ export default function AuthCard() {
                 setPassword(e.target.value);
               }}
             />
-            <p className="text-right text-sm text-blue-400 mt-1 cursor-pointer">
-              Forgot Password?
-            </p>
           </div>
 
           {error && <p className="text-red-500">{error}</p>}
