@@ -1,8 +1,8 @@
 "use client";
 
+import { TransactionsText, TableText } from "@/components/common/constants";
+import PageProvier from "@/components/ui/PageProvider";
 import Table from "@/components/ui/Table";
-import { TableText, TransactionsText } from "../../components/common/constants";
-import PageProvier from "../../components/ui/PageProvider";
 import ExpenseForm from "./_components/ExpenseForm";
 
 const Transactions = () => {

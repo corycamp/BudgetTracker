@@ -1,26 +1,56 @@
+import { Budget, CreateBudget, UpdateBudget } from "@/lib/types";
 import { MongoDB } from "../db/mongodb";
 
-interface budget{
-    _id:number;
-    category:string;
-    limit:number;
-}
-
 export class BudgetService{
-    private db;
+    private budget: MongoDB;
     constructor(db:MongoDB){
-        this.db = db;
+        this.budget = db;
     }
 
-    async getAllBudgets():Promise<budget[]>{
+    async getAllBudgets():Promise<Budget[]>{
         try{
-            const budgets = await this.db.getCollection("budgets").find({}).toArray();
-            return budgets as unknown as budget[];
+            const budgets = await this.budget.getCollection<Budget>("budgets").find().toArray();
+            return budgets;
         }catch(e){
-            console.log("Error connecting to database", e);
-            return []
+            throw new Error("Error connecting to database")
         }
-        
+    }
+
+    async createBudget(input:CreateBudget):Promise<{success:boolean}>{
+        try{
+            const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:input.category}).toArray();
+            if(!!existingBudget.length) throw new Error("Budget already exists");
+            const budget = await this.budget.getCollection<Budget>("budgets").insertOne({...input,createdAt:new Date()})
+            console.log(`${JSON.stringify(budget)} --  Added successfully`);
+            return {success:true}
+        }catch(e:any){
+            throw new Error(`Could not create budget - ${e.message}`)
+        }
+    }
+
+    async deleteBudget(category:string):Promise<{success:boolean}>{
+        try{
+            const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:category}).toArray();
+            console.log(existingBudget)
+            if(!existingBudget.length) throw new Error("Budget does not exists");
+            const budget = await this.budget.getCollection<Budget>("budgets").deleteOne({category:`${category}`})
+            console.log(`${JSON.stringify(budget)} --  Deleted successfully`);
+            return {success:true}
+        }catch(e:any){
+            throw new Error(`Could not delete budget - ${e.message}`)
+        }
+    }
+
+    async updateBudget(input:UpdateBudget):Promise<{success:boolean}>{
+        try{
+            const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:input.category}).toArray();
+            if(!existingBudget.length) throw new Error("Budget does not exists");
+            const budget = await this.budget.getCollection<Budget>("budgets").updateOne({category:input.category},{$set:{limit:input.newLimit}})
+            console.log(`${JSON.stringify(budget)} --  Updated successfully`);
+            return {success:true}
+        }catch(e:any){
+            throw new Error(`Could not update budget - ${e.message}`)
+        }
     }
 
 }

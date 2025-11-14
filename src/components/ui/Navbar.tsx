@@ -7,12 +7,16 @@ import logo from "./assets/logo.svg";
 import avatar from "./assets/avatar.svg";
 import Image from "next/image";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { NavbarLink } from "../common/interfaces";
+import { useEffect, useRef, useState } from "react";
+import { NavbarLink, User as UserInterface } from "../common/interfaces";
 import { User } from "lucide-react";
+import { signOut } from "next-auth/react";
+import { PiDoor } from "react-icons/pi";
 
-const Navbar = () => {
+const Navbar = ({ user }: UserInterface) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname().toLowerCase();
   const getNavLinks = (): string[] => {
     return Object.keys(NavigationLinks);
@@ -24,8 +28,25 @@ const Navbar = () => {
       : document.body.classList.add("overflow-hidden");
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const handleAccountIconClicked = () => setShowDropdown(!showDropdown);
+
   const desktopNavBar = () => (
-    <nav className="hidden lg:flex flex-row h-16 w-full border-b-1 pl-10 pr-10 border-white bg-[#0D0F14] justify-between items-center sticky top-0">
+    <nav className="hidden lg:flex flex-row h-16 w-full border-b pl-10 pr-10 border-white bg-[#0D0F14] justify-between items-center sticky top-0">
       <div className="w-auto flex">
         <Link href={`/Dashboard`}>
           <div className="flex flex-row items-center">
@@ -48,17 +69,61 @@ const Navbar = () => {
                   : "text-green-500"
               )}
             >
-              <Link href={`/${NavigationLinks[`${item as NavbarLink}`]}`} className={clsx(!pathname.includes(item.toLowerCase())
-                  ? "hover:cursor-pointer"
-                  : "cursor-default")}>
+              <Link
+                href={`/${NavigationLinks[`${item as NavbarLink}`]}`}
+                className={clsx(
+                  !pathname.includes(item.toLowerCase())
+                    ? "hover:cursor-pointer"
+                    : "cursor-default"
+                )}
+              >
                 {item}
               </Link>
             </div>
           );
         })}
       </div>
-      <div className="w-auto flex justify-end-safe">
-        <User className="text-white bg-gray-600 rounded-4xl w-9 h-9 p-1"/>
+      <div className="w-auto flex justify-end-safe relative" ref={dropdownRef}>
+        {!!user?.image ? (
+          <Image
+            className="rounded-4xl"
+            src={user.image}
+            alt={"Profile picture"}
+            width={35}
+            height={35}
+            onClick={handleAccountIconClicked}
+          />
+        ) : (
+          <User
+            className="text-white bg-gray-600 rounded-4xl w-9 h-9 p-1"
+            onClick={handleAccountIconClicked}
+          />
+        )}
+        {showDropdown && (
+          <div className="absolute w-30 left-0 -translate-x-14 mt-13 bg-gray-600 rounded-xl p-3 shadow-xl">
+            <svg
+              className="absolute -top-3 left-18 -translate-x-1/2 text-gray-600"
+              width="20"
+              height="12"
+              viewBox="0 0 20 12"
+              fill="currentColor"
+            >
+              <polygon points="10,0 20,12 0,12" />
+            </svg>
+            <div className="flex justify-center text-white mb-5 m-auto overflow-hidden">
+              <h2 className="break-all">Hello {user?.name?.split(" ")[0]}</h2>
+            </div>
+            <button
+              className="flex flew-row justify-center items-center w-full text-[16px] text-white hover:cursor-pointer hover:text-green-400"
+              onClick={() => signOut({ callbackUrl: "/login" })}
+            >
+              <div className="flex flew-row m-1">
+                <PiDoor className=" mr-1" size={22} />
+                Logout
+              </div>
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );
