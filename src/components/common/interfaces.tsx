@@ -30,6 +30,7 @@ export interface InputFieldProps {
   options?: string[];
   customInputClass?: string;
   inputType?: string;
+  type?: string;
 }
 
 export interface ExpenseTableItem {

@@ -59,7 +59,7 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 py-3 text-center text-gray-500 text-sm">
-        © 2025 BudgetTracker. All rights reserved.
+        © 2025 BudgetTracker. By Cory Campbell
         <div className="flex justify-center gap-6 mt-2">
           <span>Privacy Policy</span>
           <span>Terms of Service</span>

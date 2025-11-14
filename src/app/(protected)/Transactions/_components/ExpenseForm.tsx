@@ -14,10 +14,16 @@ const ExpenseForm = () => {
               title={"Amount"}
               placeholder={"0.00"}
               frontAdornment={"$"}
+              type="number"
             />
           </div>
           <div className="flex-1 flex-col">
-            <InputField id={"Date"} title={"Date"} placeholder={"mm/dd/yyyy"} />
+            <InputField
+              id={"Date"}
+              title={"Date"}
+              placeholder={"mm/dd/yyyy"}
+              type={"date"}
+            />
           </div>
         </div>
         <div className="flex flex-col w-full mt-2">
