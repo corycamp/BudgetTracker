@@ -3,11 +3,9 @@
 import { TransactionsText, TableText } from "@/components/common/constants";
 import PageProvier from "@/components/ui/PageProvider";
 import Table from "@/components/ui/Table";
-import ExpenseForm from "./ExpenseForm";
-import { User } from "@/components/common/interfaces";
+import ExpenseForm from "./_components/ExpenseForm";
 
-const TransactionsContent = (user: User) => {
-  console.log(user);
+const Transactions = () => {
   return (
     <PageProvier
       pageName={TransactionsText.heading}
@@ -54,4 +52,4 @@ const TransactionsContent = (user: User) => {
   );
 };
 
-export default TransactionsContent;
+export default Transactions;

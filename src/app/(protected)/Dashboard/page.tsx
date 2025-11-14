@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { DashboardText } from "../../../components/common/constants";
-import PageProvier from "../../../components/ui/PageProvider";
-import Overview from "./Overview";
-import Reports from "./Reports";
-import { User } from "@/components/common/interfaces";
+import { DashboardText } from "@/components/common/constants";
+import PageProvier from "@/components/ui/PageProvider";
+import Overview from "./_components/Overview";
+import Reports from "./_components/Reports";
 
-const DashboardContent = (user: User) => {
-  console.log(user);
+const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState<"Overview" | "Report">(
     "Overview"
   );
@@ -50,4 +48,4 @@ const DashboardContent = (user: User) => {
   );
 };
 
-export default DashboardContent;
+export default Dashboard;

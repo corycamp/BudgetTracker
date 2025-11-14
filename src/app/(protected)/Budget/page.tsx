@@ -4,8 +4,7 @@ import React from "react";
 import { Plus } from "lucide-react";
 import PageProvier from "@/components/ui/PageProvider";
 import { BudgetText } from "@/components/common/constants";
-import BudgetTable from "./BudgetTable";
-import { User } from "@/components/common/interfaces";
+import BudgetTable from "./_components/BudgetTable";
 
 const budgets = [
   { category: "Groceries", limit: 500, spent: 350 },
@@ -13,8 +12,7 @@ const budgets = [
   { category: "Transportation", limit: 300, spent: 100 },
 ];
 
-export default function BudgetsPage(user: User) {
-  console.log(user);
+const Budget = () => {
   const customButton = () => (
     <button className="bg-green-500 text-black font-semibold px-4 py-2 rounded-full flex items-center gap-2 hover:bg-green-400 transition">
       <Plus className="w-4 h-4" /> New Budget
@@ -61,4 +59,6 @@ export default function BudgetsPage(user: User) {
       </div>
     </PageProvier>
   );
-}
+};
+
+export default Budget;
