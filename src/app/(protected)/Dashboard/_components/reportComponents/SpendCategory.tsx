@@ -16,7 +16,7 @@ const SpendCategory = () => {
         <h2 className="text-lg font-semibold text-white">
           Spending by Category
         </h2>
-        <span className="text-sm text-gray-400 bg-[#2A2D35] px-3 py-1 rounded-full">
+        <span className="min-w-24 w-auto text-sm text-gray-400 bg-[#2A2D35] px-3 py-1 rounded-full">
           This Month
         </span>
       </div>

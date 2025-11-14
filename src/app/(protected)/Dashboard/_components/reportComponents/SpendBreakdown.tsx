@@ -3,9 +3,13 @@ import { PieChart, ResponsiveContainer, Pie, Cell } from "recharts";
 
 const SpendBreakdown = () => {
   const breakdownData = [
-    { name: "Needs", value: 60 },
-    { name: "Wants", value: 30 },
-    { name: "Savings", value: 10 },
+    { name: "Food", value: 8 },
+    { name: "Transport", value: 10 },
+    { name: "Housing", value: 20 },
+    { name: "Entertainment", value: 10 },
+    { name: "Utilities", value: 15 },
+    { name: "Shopping", value: 25 },
+    { name: "Other", value: 5 },
   ];
 
   return (
@@ -34,18 +38,18 @@ const SpendBreakdown = () => {
           <p className="text-gray-400 text-sm">Total Spent</p>
         </div>
         <ul className="mt-6 text-sm space-y-2">
-          <li className="flex items-center gap-2 text-white">
-            <span className="w-3 h-3 bg-[#4ade80] rounded-full"></span> Needs
-            <span className="ml-auto text-gray-400">60%</span>
-          </li>
-          <li className="flex items-center gap-2 text-white">
-            <span className="w-3 h-3 bg-[#22c55e] rounded-full"></span> Wants
-            <span className="ml-auto text-gray-400">30%</span>
-          </li>
-          <li className="flex items-center gap-2 text-white">
-            <span className="w-3 h-3 bg-[#14532d] rounded-full"></span> Savings
-            <span className="ml-auto text-gray-400">10%</span>
-          </li>
+          {breakdownData.map((item) => {
+            return (
+              <li
+                key={item.name}
+                className="flex items-center gap-2 text-white"
+              >
+                <span className="w-3 h-3 bg-[#4ade80] rounded-full"></span>{" "}
+                {item.name}
+                <span className="ml-auto text-gray-400">{`${item.value}%`}</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>

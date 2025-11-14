@@ -5,7 +5,7 @@ const PageProvier = (props: PageProviderProps) => {
 
   return (
     <div className="pl-10 pr-10">
-      <div className="flex flex-row pt-5 mb-10 mt-15 lg:mt-0">
+      <div className="flex flex-col md:flex-row pt-5 mb-10 mt-15 lg:mt-0">
         <div className="w-full md:w-1/2 flex flex-col">
           <h1 className="text-[35px] font-bold text-white">{pageName}</h1>
           {!!pageSubHeading && (
@@ -15,7 +15,7 @@ const PageProvier = (props: PageProviderProps) => {
           )}
         </div>
         {!!customButton && (
-          <div className="w-1/2 flex justify-end items-center">
+          <div className="w-40 md:w-1/2 flex justify-start md:justify-end items-center mt-4 lg:mt-0">
             {customButton()}
           </div>
         )}

@@ -14,7 +14,7 @@ const TrendsTable = () => {
     <div className="lg:col-span-2 bg-[#1C1E24] rounded-2xl p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-white">Spending Trends</h2>
-        <span className="text-sm text-gray-400 bg-[#2A2D35] px-3 py-1 rounded-full">
+        <span className="min-w-28 w-auto text-sm text-gray-400 bg-[#2A2D35] px-3 py-1 rounded-full">
           Last 6 Months
         </span>
       </div>

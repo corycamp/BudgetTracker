@@ -48,6 +48,12 @@ export const TableText = {
     }
 }
 
+export const FeatureCardText={
+    TrackSpending:"Effortlessly monitor where your money goes. Keep up to date with your budget and spending.",
+    PiggyBank:"Set realistic budgets you can stick to. We'll help you stay on track.",
+    Reports:"Understand your financial health with insightful charts and graphs. Make informed decisions with your data."
+}
+
 export const iconMapping =(iconType:expenseCategory)=>{
     switch(iconType){
         case "Food":
