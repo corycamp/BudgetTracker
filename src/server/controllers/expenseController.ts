@@ -7,18 +7,18 @@ export class ExpenseController{
         this.expenseService = expenseService;
     }
 
-    async getAllExpenses():Promise<Expense[]>{
-        return await this.expenseService.getAllExpenses();
+    async getAllExpenses(email:string):Promise<Expense[]>{
+        return await this.expenseService.getAllExpenses(email);
     }
 
     async createExpense(input:CreateExpense):Promise<{success:boolean}>{
         return await this.expenseService.createExpense(input);
     }
-     async getPastExpenses():Promise<Expense[]>{
-        return await this.expenseService.getPastExpenses();
+     async getPastExpenses(email:string):Promise<Expense[]>{
+        return await this.expenseService.getPastExpenses(email);
     }
-     async getCurrentExpenses():Promise<Expense[]>{
-        return await this.expenseService.getCurrentExpenses();
+     async getCurrentExpenses(email:string):Promise<Expense[]>{
+        return await this.expenseService.getCurrentExpenses(email);
     }
 
 }

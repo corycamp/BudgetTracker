@@ -9,9 +9,11 @@ export class ExpenseService{
         this.expense = db;
     }
 
-    async getAllExpenses():Promise<Expense[]>{
+    async getAllExpenses(email:string):Promise<Expense[]>{
         try{
-            const expense = await this.expense.getCollection<Expense>("expenses").find().toArray();
+            const expense = await this.expense.getCollection<Expense>("expenses").find({email:`${email}`})
+            .sort({createdAt:-1})
+            .toArray();
             return expense;
         }catch(e){
             throw new Error("Error connecting to database")
@@ -20,7 +22,7 @@ export class ExpenseService{
 
      async createExpense(input:CreateExpense):Promise<{success:boolean}>{
         try{
-            const date = new Date();
+            const date = new Date(input.createdAt)
             const expense = await this.expense.getCollection<Expense>("expenses").insertOne({
             ...input,
             createdAt:date
@@ -32,13 +34,14 @@ export class ExpenseService{
         }
     }
 
-     async getPastExpenses():Promise<Expense[]>{
+     async getPastExpenses(email:string):Promise<Expense[]>{
         try{
             const lastMonth = getPreviousMonthRange();
             const expense = await this.expense.getCollection<Expense>("expenses").find({
                 createdAt:{$lte:lastMonth.endOfPrevMonth},
+                email:`${email}`
             })
-            .sort({createdAt:1})
+            .sort({createdAt:-1})
             .toArray();
             return expense;
         }catch(e){
@@ -46,13 +49,14 @@ export class ExpenseService{
         }
     }
 
-     async getCurrentExpenses():Promise<Expense[]>{
+     async getCurrentExpenses(email:string):Promise<Expense[]>{
         try{
             const lastMonth = getPreviousMonthRange();
              const expense = await this.expense.getCollection<Expense>("expenses").find({
                 createdAt:{$gt:lastMonth.endOfPrevMonth},
+                email:`${email}`
             })
-            .sort({createdAt:1})
+            .sort({createdAt:-1})
             .toArray();
             return expense;
         }catch(e){

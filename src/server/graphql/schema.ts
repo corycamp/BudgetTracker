@@ -1,6 +1,6 @@
 import {gql} from "graphql-tag"
 import { getAppModule } from "../appModule/provider";
-import { Budget, CreateBudget, CreateExpense, DeleteBudget, UpdateBudget } from "@/lib/types";
+import { CreateBudget, CreateExpense, DeleteBudget, UpdateBudget } from "@/lib/types";
 
 export const typeDefs = gql`
     type Budget{
@@ -24,30 +24,35 @@ export const typeDefs = gql`
     input CreateBudget{
         category: String!
         limit: Float!
+        email:String!
     }
 
      input CreateExpense{
         amount: Float!
         category: String!
         merchant: String!
+        createdAt:String!
+        email:String!
         notes: String
     }
 
     input UpdateBudget{
         category: String!
         newLimit: Float!
+        email:String!
     }
 
     input DeleteBudget{
         category: String!
+        email:String!
     }
 
     
     type Query{
-        getAllBudgets: [Budget]
+        getAllBudgets(email:String!): [Budget]
         getAllExpenses: [Expense]
-        getPastExpenses: [Expense]
-        getCurrentExpenses: [Expense]
+        getPastExpenses(email:String!): [Expense]
+        getCurrentExpenses(email:String!): [Expense]
     }
 
     type Mutation{
@@ -60,17 +65,17 @@ export const typeDefs = gql`
 
 export const resolvers = {
     Query:{
-        getAllBudgets:()=>getAppModule().budgetController.getAllBudgets(),
-        getAllExpenses:()=>getAppModule().expenseController.getAllExpenses(),
-        getPastExpenses:()=>getAppModule().expenseController.getPastExpenses(),
-        getCurrentExpenses:()=>getAppModule().expenseController.getCurrentExpenses(),
+        getAllBudgets:(_: any, {email}:{email:string})=>getAppModule().budgetController.getAllBudgets(email),
+        getAllExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getAllExpenses(email),
+        getPastExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getPastExpenses(email),
+        getCurrentExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getCurrentExpenses(email),
     },
     Mutation:{
         createBudget:async(_: any, {input}:{input:CreateBudget})=>{
             return await getAppModule().budgetController.createBudget(input)
         },
         deleteBudget:async(_: any, {input}:{input:DeleteBudget})=>{
-            return await getAppModule().budgetController.deleteBudget(input.category)
+            return await getAppModule().budgetController.deleteBudget(input)
         },
         updateBudget:async(_: any, {input}:{input:UpdateBudget})=>{
             return await getAppModule().budgetController.updateBudget(input)

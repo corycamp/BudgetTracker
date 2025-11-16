@@ -2,6 +2,8 @@ export interface CreateExpense{
     amount:number;
     category:string;
     merchant:string;
+    email:string;
+    createdAt:string;
     notes?:string;
 }
 
@@ -11,8 +13,4 @@ export interface Expense{
     category:string;
     merchant:string;
     notes?:string;
-}
-
-export interface ExpenseByDate{
-    date: string;
 }

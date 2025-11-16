@@ -1,26 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Budget } from "@/lib/types";
+import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface UserState {
-  name: string | null;
-  image: string | null;
-}
 
-const initialState: UserState = {
-  name: null,
-  image: null,
-};
+const initialState: Budget[] = [];
 
 export const BudgetSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
-      state.name = action.payload.name;
-      state.image = action.payload.image;
+    setUser: (state, action: PayloadAction<Budget>) => {
+      state.push(action.payload)
     },
     clearUser: (state) => {
-      state.name = null;
-      state.image = null;
+      state=[]
     },
   },
 });

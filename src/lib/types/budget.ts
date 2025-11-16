@@ -1,6 +1,7 @@
 export  interface CreateBudget{
     category: string;
     limit: number;
+    email:string;
 } 
 
 export interface Budget{
@@ -12,8 +13,10 @@ export interface Budget{
 export interface UpdateBudget{
     category:string;
     newLimit:number;
+    email:string
 }
 
 export interface DeleteBudget{
     category: string;
+    email:string;
 }

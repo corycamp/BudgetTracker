@@ -7,23 +7,17 @@ interface ExpenseState {
     notes?:string;
 }
 
-const initialState: ExpenseState = {
-    amount: 0,
-    category: "",
-    merchant: "",
-};
+const initialState: ExpenseState[] = [];
 
 export const expenseSlice = createSlice({
   name: "expense",
   initialState,
   reducers: {
     setExpenses: (state, action: PayloadAction<ExpenseState>) => {
-    //   state.name = action.payload.name;
-    //   state.image = action.payload.image;
+    state.push(action.payload)
     },
     clearUser: (state) => {
-    //   state.name = null;
-    //   state.image = null;
+      state=[];
     },
   },
 });
