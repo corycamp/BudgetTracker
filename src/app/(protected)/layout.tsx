@@ -5,6 +5,7 @@ import Navbar from "@/components/ui/Navbar";
 import { ReactNode } from "react";
 import Providers from "@/redux/Providers";
 import { UserState } from "@/redux/userSlice";
+import { getAllExpenses } from "../api/graphql/resolvers";
 
 interface ProtectedLayoutProps {
   children: ReactNode;
@@ -13,11 +14,15 @@ interface ProtectedLayoutProps {
 export default async function ProtectedLayout({
   children,
 }: ProtectedLayoutProps) {
+  console.log(authOptions)
   const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect("/login");
   }
+
+  const expenses = await getAllExpenses("test@email.com");
+  console.log(expenses.getAllExpenses)
 
   return (
     <Providers user={session.user as UserState}>

@@ -4,8 +4,11 @@ import { TransactionsText, TableText } from "@/components/common/constants";
 import PageProvier from "@/components/ui/PageProvider";
 import Table from "@/components/ui/Table";
 import ExpenseForm from "./_components/ExpenseForm";
+import { useSelector } from "react-redux";
 
 const Transactions = () => {
+  const expenses = useSelector((state: any) => state.expense);
+  console.log(expenses)
   return (
     <PageProvier
       pageName={TransactionsText.heading}
@@ -30,20 +33,7 @@ const Transactions = () => {
             <Table
               header={Object.values(TableText.headers.expenses)}
               emptyValue={"No Recent Expenses"}
-              data={[
-                {
-                  date: "test",
-                  category: "Shopping",
-                  merchant: "Test merchant",
-                  amount: "0.00",
-                },
-                {
-                  date: "test",
-                  category: "Shopping",
-                  merchant: "Test merchant",
-                  amount: "0.00",
-                },
-              ]}
+              data={expenses}
             />
           </div>
         </div>

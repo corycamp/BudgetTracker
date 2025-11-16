@@ -18,6 +18,7 @@ export const authOptions:AuthOptions={
                 password:{label:"Password", type:"password"}
             },
             async authorize(credentials:any){
+                console.log(credentials)
                 const client = new MongoDB();
                 await client.connect();
                 const user = await client.getCollection<User>("users").findOne({email: credentials.email});

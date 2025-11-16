@@ -50,7 +50,7 @@ export const typeDefs = gql`
     
     type Query{
         getAllBudgets(email:String!): [Budget]
-        getAllExpenses: [Expense]
+        getAllExpenses(email:String!): [Expense]
         getPastExpenses(email:String!): [Expense]
         getCurrentExpenses(email:String!): [Expense]
     }

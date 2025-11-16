@@ -1,7 +1,7 @@
-export async function getAllExpenses() {
+export async function getAllExpenses(email:string) {
   const query = `
-    query GetAllExpenses {
-        getAllExpenses {
+    query GetAllExpenses($email:String!) {
+        getAllExpenses(email:$email) {
             amount
             createdAt
             category
@@ -14,12 +14,14 @@ export async function getAllExpenses() {
   const res = await fetch(process.env.GRAPHQL_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
+    body: JSON.stringify({ query:query, variables:{
+        email:email
+    } }),
     cache: "no-store" // avoids stale data
   });
 
   const json = await res.json();
-  return json.data.expenses;
+  return json.data;
 }
 
 export async function getCurrentExpenses() {
@@ -69,3 +71,11 @@ export async function getPastExpensess() {
   const json = await res.json();
   return json.data.expenses;
 }
+
+const CREATE_EXPENSE_MUTATION = `
+  mutation CreateExpense($input: CreateExpense!) {
+    createExpense(input: $input) {
+      success
+    }
+  }
+`;
