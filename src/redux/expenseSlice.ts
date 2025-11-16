@@ -4,6 +4,7 @@ interface ExpenseState {
     amount:number;
     category:string;
     merchant:string;
+    createdAt:string;
     notes?:string;
 }
 
@@ -14,8 +15,8 @@ export const expenseSlice = createSlice({
   initialState,
   reducers: {
     setExpenses: (_state, action: PayloadAction<ExpenseState[]>) => action.payload,
-    addExpenses: (state, action: PayloadAction<ExpenseState[]>) => {
-    state.push(...action.payload)
+    addExpenses: (state, action: PayloadAction<ExpenseState>) => {
+    state.push(action.payload)
     },
     clearExpenses: (state) => {
       state=[];

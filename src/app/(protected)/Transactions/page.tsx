@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 const Transactions = () => {
   const expenses = useSelector((state: any) => state.expense);
-  console.log(expenses)
   return (
     <PageProvier
       pageName={TransactionsText.heading}

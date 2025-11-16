@@ -21,12 +21,6 @@ const Dashboard = () => {
       ? "pb-2 border-b-2 border-green-500 text-green-500"
       : "pb-2 border-b-2 border-transparent text-gray-400 hover:text-white hover:cursor-pointer";
 
-  useEffect(() => {
-    if (userEmail === null) {
-      dispatch(setUser({ email: "test" }));
-    }
-  }, []);
-
   return (
     <PageProvier
       pageName={DashboardText.heading}

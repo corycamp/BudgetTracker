@@ -39,12 +39,6 @@ export const TableText = {
             merchant:"Merchant",
             amout:"Amount"
         },
-        transactions: {
-            date: "Date",
-            description:"Description",
-            category:"Category",
-            amout:"Amount"
-        },
     }
 }
 

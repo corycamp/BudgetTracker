@@ -11,10 +11,12 @@ const InputField = (props: InputFieldProps) => {
     customInputClass,
     inputType = "input",
     type = "text",
+    ref,
+    onChange,
   } = props;
   return (
     <div>
-      <label htmlFor="price" className="block text-sm/6 font-medium text-white">
+      <label htmlFor={id} className="block text-sm/6 font-medium text-white">
         {title}
       </label>
       <div className="mt-2">
@@ -32,6 +34,8 @@ const InputField = (props: InputFieldProps) => {
               placeholder={placeholder}
               className={`block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-black placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
               maxLength={50}
+              ref={ref}
+              onChange={onChange}
             />
           ) : (
             <textarea

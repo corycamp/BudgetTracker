@@ -1,3 +1,6 @@
+import { Expense } from "@/lib/types";
+import { ChangeEvent, RefObject } from "react";
+
 export type NavbarLink = "Dashboard" | "Transactions" | "Budget";
 export type expenseCategory =
   | "Food"
@@ -31,13 +34,8 @@ export interface InputFieldProps {
   customInputClass?: string;
   inputType?: string;
   type?: string;
-}
-
-export interface ExpenseTableItem {
-  date: string;
-  category: string;
-  merchant: string;
-  amount: string;
+  ref?: RefObject<HTMLInputElement | null>;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export interface RecentTransactionsTableItem {
@@ -51,7 +49,7 @@ export interface TableProps {
   title?: string;
   header: string[];
   emptyValue: string;
-  data: ExpenseTableItem[] | RecentTransactionsTableItem[];
+  data: Expense[];
 }
 
 export interface SpentItemProps {

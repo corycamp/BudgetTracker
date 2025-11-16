@@ -9,7 +9,7 @@ export interface CreateExpense{
 
 export interface Expense{
     amount:number;
-    createdAt:Date;
+    createdAt:Date | string;
     category:string;
     merchant:string;
     notes?:string;
