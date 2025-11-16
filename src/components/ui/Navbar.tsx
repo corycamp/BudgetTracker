@@ -11,8 +11,10 @@ import { NavbarLink, User as UserInterface } from "../common/interfaces";
 import { User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { PiDoor } from "react-icons/pi";
+import { useSelector } from "react-redux";
+import { UserState } from "@/redux/userSlice";
 
-const Navbar = ({ user }: UserInterface) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -20,6 +22,8 @@ const Navbar = ({ user }: UserInterface) => {
   const getNavLinks = (): string[] => {
     return Object.keys(NavigationLinks);
   };
+
+  const user = useSelector((state: any) => state.user);
 
   useEffect(() => {
     setIsOpen(false);

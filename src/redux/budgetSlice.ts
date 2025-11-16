@@ -5,17 +5,17 @@ import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 const initialState: Budget[] = [];
 
 export const BudgetSlice = createSlice({
-  name: "user",
+  name: "budget",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<Budget>) => {
+    addBudget: (state, action: PayloadAction<Budget>) => {
       state.push(action.payload)
     },
-    clearUser: (state) => {
+    clearBudget: (state) => {
       state=[]
     },
   },
 });
 
-export const { setUser, clearUser } = BudgetSlice.actions;
+export const { addBudget, clearBudget } = BudgetSlice.actions;
 export default BudgetSlice.reducer;
