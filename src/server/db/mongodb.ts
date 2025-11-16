@@ -6,7 +6,8 @@ export class MongoDB{
     private db?:Db;
 
     constructor(){
-        const uri = process.env.MONGODB_URI
+        const uri = `${process.env.MONGODB_URI}`
+        console.log(process.env.MONGODB_URI)
         if(!uri){
             throw new Error("MONGODB_URI is not defined in the env")
         }
