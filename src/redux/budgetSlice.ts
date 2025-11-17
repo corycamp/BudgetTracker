@@ -1,6 +1,11 @@
 import { Budget } from "@/lib/types";
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
 
+export interface BudgetState{
+  category:string;
+  limit:number;
+  createdAt:string;
+}
 
 const initialState: Budget[] = [];
 
@@ -9,8 +14,8 @@ export const BudgetSlice = createSlice({
   initialState,
   reducers: {
     setBudget: (_state, action: PayloadAction<Budget[]>) => action.payload,
-    addBudget: (state, action: PayloadAction<Budget[]>) => {
-      state.push(...action.payload)
+    addBudget: (state, action: PayloadAction<Budget>) => {
+      state.push(action.payload)
     },
     clearBudget: (state) => {
       state=[]

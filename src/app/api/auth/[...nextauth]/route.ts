@@ -37,7 +37,8 @@ export const authOptions:AuthOptions={
         signIn: "/login",
     },
     session:{
-        strategy: "jwt"
+        strategy: "jwt",
+        maxAge: 60 * 30
     },
     secret: process.env.AUTH_SECRET
 };

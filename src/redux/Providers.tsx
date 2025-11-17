@@ -4,22 +4,26 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { setUser, UserState } from "./userSlice";
 import { useEffect } from "react";
-import { Expense } from "@/lib/types";
-import { setExpenses } from "./expenseSlice";
+import { Budget, Expense } from "@/lib/types";
+import { ExpenseState, setExpenses } from "./expenseSlice";
+import { setBudget } from "./budgetSlice";
 
 export default function Providers({
   children,
   user,
-  expenses
+  expenses,
+  budgets,
 }: {
   children: React.ReactNode;
   user: UserState;
-  expenses: Expense[]
+  expenses: Expense[];
+  budgets: Budget[];
 }) {
   useEffect(() => {
     if (user) {
       store.dispatch(setUser(user));
-      store.dispatch(setExpenses(expenses))
+      store.dispatch(setExpenses(expenses as ExpenseState[]));
+      store.dispatch(setBudget(budgets));
     }
   }, [user]);
 

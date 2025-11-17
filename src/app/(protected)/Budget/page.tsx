@@ -7,18 +7,11 @@ import { BudgetText } from "@/components/common/constants";
 import BudgetTable from "./_components/BudgetTable";
 import BudgetModal from "./_components/BudgetModal";
 import { budgetOption, Budgets } from "@/components/common/interfaces";
-
-const budgets: Budgets[] = [
-  { category: "Food", limit: 500, spent: 350 },
-  { category: "Shopping", limit: 200, spent: 180 },
-  { category: "Transportation", limit: 300, spent: 100 },
-  { category: "Housing", limit: 300, spent: 100 },
-  { category: "Entertainment", limit: 300, spent: 100 },
-  { category: "Utilities", limit: 300, spent: 100 },
-  { category: "Other", limit: 300, spent: 100 },
-];
+import { useSelector } from "react-redux";
 
 const Budget = () => {
+  const budgets = useSelector((state: any) => state.budget);
+  console.log(budgets);
   const [open, setOpen] = useState<boolean>(false);
   const [type, setType] = useState<budgetOption>("createBudget");
   const customButton = () => (

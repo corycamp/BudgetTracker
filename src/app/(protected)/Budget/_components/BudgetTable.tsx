@@ -79,10 +79,10 @@ const BudgetTable = (props: BudgetTableProps) => {
                     ${b.limit.toFixed(2)}
                   </td>
                   <td className="py-4 px-6 text-white">
-                    ${b.spent.toFixed(2)}
+                    {/* ${b.spent.toFixed(2)} */}
                   </td>
                   <td className="py-4 px-6 text-white">
-                    ${remaining.toFixed(2)}
+                    {/* ${remaining.toFixed(2)} */}
                   </td>
                   <td className="py-4 px-6 w-1/4">
                     <div className="flex items-center gap-2">

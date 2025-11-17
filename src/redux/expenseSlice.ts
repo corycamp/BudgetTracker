@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ExpenseState {
+export interface ExpenseState {
     amount:number;
     category:string;
     merchant:string;
