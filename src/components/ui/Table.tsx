@@ -94,7 +94,7 @@ const Table = (props: TableProps) => {
         <table className="w-full">
           <thead className="text-gray-400 uppercase text-sm">
             <tr className="text-center">
-              {header??.map((item) => (
+              {header?.map((item) => (
                 <th className="py-3" key={item}>
                   {item}
                 </th>
@@ -103,7 +103,7 @@ const Table = (props: TableProps) => {
             </tr>
           </thead>
           <tbody>
-            {data??.map((item, index) => {
+            {data?.map((item, index) => {
               let date = "";
               if (`${item.date}`.includes("-")) {
                 date = getDateString(new Date(item.date));
