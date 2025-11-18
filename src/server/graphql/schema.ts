@@ -1,6 +1,6 @@
 import {gql} from "graphql-tag"
 import { getAppModule } from "../appModule/provider";
-import { Budget, CreateBudget, CreateExpense, DeleteBudget, UpdateBudget } from "@/lib/types";
+import { CreateBudget, CreateExpense, DeleteBudget, DeleteExpense, UpdateBudget } from "@/lib/types";
 
 export const typeDefs = gql`
     type Budget{
@@ -11,10 +11,16 @@ export const typeDefs = gql`
 
     type Expense{
         amount: Float
+        date: String
         createdAt: String
         category: String
         merchant: String
         notes: String
+    }
+
+    type SpendingTrendItem{
+        amount: Float
+        month: String
     }
 
     type ResponseObject{
@@ -24,30 +30,41 @@ export const typeDefs = gql`
     input CreateBudget{
         category: String!
         limit: Float!
+        email:String!
     }
 
      input CreateExpense{
         amount: Float!
         category: String!
         merchant: String!
+        date: Float!
+        createdAt:Float!
+        email:String!
         notes: String
     }
 
     input UpdateBudget{
         category: String!
         newLimit: Float!
+        email:String!
     }
 
     input DeleteBudget{
         category: String!
+        email:String!
+    }
+
+    input DeleteExpense{
+        createdAt: Float!
+        email: String!
     }
 
     
     type Query{
-        getAllBudgets: [Budget]
-        getAllExpenses: [Expense]
-        getPastExpenses: [Expense]
-        getCurrentExpenses: [Expense]
+        getAllBudgets(email:String!): [Budget]
+        getAllExpenses(email:String!): [Expense]
+        getPastExpenses(email:String!): [SpendingTrendItem]
+        getCurrentExpenses(email:String!): [Expense]
     }
 
     type Mutation{
@@ -55,28 +72,32 @@ export const typeDefs = gql`
         createExpense(input: CreateExpense!): ResponseObject
         deleteBudget(input: DeleteBudget!): ResponseObject
         updateBudget(input: UpdateBudget!): ResponseObject
+        deleteExpense(input: DeleteExpense!): ResponseObject
     }
 `;
 
 export const resolvers = {
     Query:{
-        getAllBudgets:()=>getAppModule().budgetController.getAllBudgets(),
-        getAllExpenses:()=>getAppModule().expenseController.getAllExpenses(),
-        getPastExpenses:()=>getAppModule().expenseController.getPastExpenses(),
-        getCurrentExpenses:()=>getAppModule().expenseController.getCurrentExpenses(),
+        getAllBudgets:(_: any, {email}:{email:string})=>getAppModule().budgetController.getAllBudgets(email),
+        getAllExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getAllExpenses(email),
+        getPastExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getPastExpenses(email),
+        getCurrentExpenses:(_: any, {email}:{email:string})=>getAppModule().expenseController.getCurrentExpenses(email),
     },
     Mutation:{
         createBudget:async(_: any, {input}:{input:CreateBudget})=>{
             return await getAppModule().budgetController.createBudget(input)
         },
         deleteBudget:async(_: any, {input}:{input:DeleteBudget})=>{
-            return await getAppModule().budgetController.deleteBudget(input.category)
+            return await getAppModule().budgetController.deleteBudget(input)
         },
         updateBudget:async(_: any, {input}:{input:UpdateBudget})=>{
             return await getAppModule().budgetController.updateBudget(input)
         },
         createExpense:async(_: any, {input}:{input:CreateExpense})=>{
             return await getAppModule().expenseController.createExpense(input)
+        },
+        deleteExpense:async(_: any, {input}:{input:DeleteExpense})=>{
+            return await getAppModule().expenseController.deleteExpense(input)
         },
     }
 }

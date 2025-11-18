@@ -6,7 +6,7 @@ export class MongoDB{
     private db?:Db;
 
     constructor(){
-        const uri = process.env.MONGODB_URI
+        const uri = `${process.env.MONGODB_URI}`
         if(!uri){
             throw new Error("MONGODB_URI is not defined in the env")
         }
@@ -20,7 +20,6 @@ export class MongoDB{
             if(!this.db){
                 await this.client.connect();
                 this.db = this.client.db(`${process.env.MONGODB_DB}`)
-                console.log(`Connected to MongoDB: ${process.env.MONGODB_DB}`)
             }
         }catch(e){
             console.log("Error connecting to database....",e)

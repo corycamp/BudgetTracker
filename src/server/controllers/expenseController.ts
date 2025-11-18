@@ -1,4 +1,4 @@
-import { CreateExpense, Expense } from "@/lib/types";
+import { CreateExpense, DeleteExpense, Expense, SpendingTrendItem } from "@/lib/types";
 import { ExpenseService } from "../services/ExpenseService";
 
 export class ExpenseController{
@@ -7,18 +7,21 @@ export class ExpenseController{
         this.expenseService = expenseService;
     }
 
-    async getAllExpenses():Promise<Expense[]>{
-        return await this.expenseService.getAllExpenses();
+    async getAllExpenses(email:string):Promise<Expense[]>{
+        return await this.expenseService.getAllExpenses(email);
     }
 
     async createExpense(input:CreateExpense):Promise<{success:boolean}>{
         return await this.expenseService.createExpense(input);
     }
-     async getPastExpenses():Promise<Expense[]>{
-        return await this.expenseService.getPastExpenses();
+    async deleteExpense(input:DeleteExpense):Promise<{success:boolean}>{
+        return await this.expenseService.deleteExpense(input);
     }
-     async getCurrentExpenses():Promise<Expense[]>{
-        return await this.expenseService.getCurrentExpenses();
+     async getPastExpenses(email:string):Promise<SpendingTrendItem[]>{
+        return await this.expenseService.getPastExpenses(email);
+    }
+     async getCurrentExpenses(email:string):Promise<Expense[]>{
+        return await this.expenseService.getCurrentExpenses(email);
     }
 
 }

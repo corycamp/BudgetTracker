@@ -1,3 +1,6 @@
+import { Expense } from "@/lib/types";
+import { ChangeEvent, RefObject } from "react";
+
 export type NavbarLink = "Dashboard" | "Transactions" | "Budget";
 export type expenseCategory =
   | "Food"
@@ -7,6 +10,8 @@ export type expenseCategory =
   | "Entertainment"
   | "Utilities"
   | "Other";
+
+export type budgetOption = "createBudget" | "editBudget" | "confirmBudget";
 export interface PageProviderProps {
   pageName: string;
   pageSubHeading?: string;
@@ -17,6 +22,27 @@ export interface PageProviderProps {
 export interface CardProps {
   title: string;
   amount: number;
+  loading: boolean;
+}
+
+export interface BudgetState {
+  category: string;
+  limit: number;
+  createdAt: number;
+}
+
+export interface ExpenseState {
+  amount: number;
+  category: string;
+  merchant: string;
+  createdAt: number;
+  date: number;
+  notes?: string;
+}
+
+export interface SummaryCardProps {
+  budgets: BudgetState[];
+  expenses: ExpenseState[];
 }
 
 export interface InputFieldProps {
@@ -28,13 +54,9 @@ export interface InputFieldProps {
   options?: string[];
   customInputClass?: string;
   inputType?: string;
-}
-
-export interface ExpenseTableItem {
-  date: string;
-  category: string;
-  merchant: string;
-  amount: string;
+  type?: string;
+  ref?: RefObject<HTMLInputElement | null>;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export interface RecentTransactionsTableItem {
@@ -48,17 +70,23 @@ export interface TableProps {
   title?: string;
   header: string[];
   emptyValue: string;
-  data: ExpenseTableItem[] | RecentTransactionsTableItem[];
+  data: Expense[];
 }
 
 export interface SpentItemProps {
   merchant: string;
   category: expenseCategory;
-  amount: string;
+  amount: number;
 }
 
 export interface SpentItemsProps {
   data: SpentItemProps[];
+}
+
+export interface BudgetTableItemProps {
+  category: string;
+  limit: number;
+  spent: number;
 }
 
 export interface User {

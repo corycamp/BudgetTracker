@@ -1,27 +1,16 @@
 import { TableText } from "@/components/common/constants";
 import Table from "@/components/ui/Table";
+import { useSelector } from "react-redux";
 
 const RecentTransactions = () => {
+  const expenses = useSelector((state: any) => state.expense);
   return (
     <div className="w-full lg:w-49/100">
       <Table
         title={TableText.titles.transactions}
-        header={Object.values(TableText.headers.transactions)}
+        header={Object.values(TableText.headers.expenses)}
         emptyValue={"No Recent Transactions"}
-        data={[
-          {
-            date: "2025-09-16",
-            category: "Shopping qeqweqweqweqeqweqwewqe",
-            description: "Test description",
-            amount: "0.00",
-          },
-          {
-            date: "2025-09-16",
-            category: "Wash",
-            description: "Test description",
-            amount: "0.00",
-          },
-        ]}
+        data={expenses}
       />
     </div>
   );

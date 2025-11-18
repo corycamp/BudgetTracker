@@ -1,59 +1,78 @@
-import {
-  ExpenseTableItem,
-  RecentTransactionsTableItem,
-  TableProps,
-} from "../common/interfaces";
+import { Expense } from "@/lib/types";
+import { TableProps } from "../common/interfaces";
+import { getDateString } from "@/lib/utils/dateRange";
+import { Trash } from "lucide-react";
+import { deleteExpense } from "@/app/api/graphql/resolvers";
+import { useDispatch, useSelector } from "react-redux";
+import { removeExpense } from "@/redux/expenseSlice";
 
 const Table = (props: TableProps) => {
   const { title, header, emptyValue, data } = props;
+  const user = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
 
-  const tableHeader = () => {
+  const handleDelete = async (createdAt: Date) => {
+    const response = await deleteExpense({
+      createdAt: Number(createdAt),
+      email: `${user.email}`,
+    });
+    if (!!response) {
+      dispatch(
+        removeExpense({
+          createdAt: Number(createdAt),
+        })
+      );
+    }
+  };
+
+  const trashIcon = (createdAt: Date) => {
     return (
-      <div className="flex flex-row w-full justify-between mb-3 text-white">
-        {header?.map((item) => (
-          <h3 key={item}>{item}</h3>
-        ))}
-      </div>
+      <Trash
+        size={20}
+        onClick={(e) => {
+          e.preventDefault();
+          handleDelete(createdAt);
+        }}
+      />
     );
   };
 
-  const tableItem = (item: (typeof data)[0]) => {
+  const itemCard = (item: Expense, index: number) => {
+    let date = "";
+    if (`${item.date}`.includes("-")) {
+      date = getDateString(new Date(item.date));
+    } else {
+      date = getDateString(item.date as Date);
+    }
     return (
-      <div className="flex flex-row w-full justify-between border-t-1 border-t-gray-200 pt-2 text-white">
-        {Object.values(item).map((item: string) => (
-          <div key={item}>
-            <h3>{item.replace(/^(.{10}).*$/, "$1")}</h3>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const itemCard = (
-    item: ExpenseTableItem | RecentTransactionsTableItem,
-    index: number
-  ) => (
-    <div
-      className={`flex flex-row w-full justify-between ${
-        index != 0 && "border-t-1"
-      } pb-3 pt-3 border-t-gray-300`}
-    >
-      <div className="flex flex-col">
-        <h3 className="text-white">
-          {"description" in item ? item.description : item.merchant}
-        </h3>
-        <h5 className="text-gray-400">{item.date}</h5>
-      </div>
-      <div className="flex flex-row items-center ml-2">
-        <div className="flex flex-wrap rounded-4xl bg-gray-100 min-w-15 p-2 justify-center">
-          <h3 className="text-[15px]">
-            {item.category.replace(/^(.{5}).*$/, "$1")}
-          </h3>
+      <div
+        className={`flex flex-row w-full justify-between ${
+          index != 0 && "border-t"
+        } pb-3 pt-3 border-t-gray-300`}
+      >
+        <div className="flex flex-col">
+          <h3 className="text-white">{item.merchant}</h3>
+          <h5 className="text-gray-400">{date}</h5>
         </div>
-        <h3 className="text-[20px] text-red-400 ml-5">{item.amount}</h3>
+        <div className="flex flex-row items-center ml-2">
+          <div className="hidden sm:flex flex-wrap rounded-4xl bg-gray-100 min-w-15 p-2 justify-center">
+            <h3 className="text-[15px]">{item.category}</h3>
+          </div>
+          <h3 className="text-[20px] text-white ml-5">
+            $
+            {item.amount > 1000000
+              ? `${(item.amount / 1000000).toFixed(2)}M`
+              : item.amount > 1000
+                ? `${(item.amount / 1000).toFixed(2)}K`
+                : item.amount}
+          </h3>
+          <div className="text-white ml-2">
+            {trashIcon(item.createdAt as Date)}
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const mobileTableItem = () => {
     return (
@@ -71,15 +90,54 @@ const Table = (props: TableProps) => {
 
   const desktopTableItem = () => {
     return (
-      <div className="hidden lg:flex flex-col">
-        <div className="flex flex-row w-full">{tableHeader()}</div>
-        {data?.map((item, index) => {
-          return (
-            <div key={index} className="flex flex-row w-full">
-              {tableItem(item)}
-            </div>
-          );
-        })}
+      <div className="hidden lg:inline-block flex-col w-full">
+        <table className="w-full">
+          <thead className="text-gray-400 uppercase text-sm">
+            <tr className="text-center">
+              {header?.map((item) => (
+                <th className="py-3" key={item}>
+                  {item}
+                </th>
+              ))}
+              <th className="py-3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((item, index) => {
+              let date = "";
+              if (`${item.date}`.includes("-")) {
+                date = getDateString(new Date(item.date));
+              } else {
+                date = getDateString(item.date as Date);
+              }
+              return (
+                <tr
+                  key={index}
+                  className="border-t border-gray-700 hover:bg-[#2A2D35] transition text-center"
+                >
+                  <td className="py-4 px-6 font-medium text-white">{date}</td>
+                  <td className="py-4 px-6 font-medium text-white">
+                    {item.category}
+                  </td>
+                  <td className="py-4 px-6 font-medium text-white">
+                    {item.merchant}
+                  </td>
+                  <td className="py-4 px-6 font-medium text-white">
+                    $
+                    {item.amount > 1000000
+                      ? `${(item.amount / 1000000).toFixed(2)}M`
+                      : item.amount > 1000
+                        ? `${(item.amount / 1000).toFixed(2)}K`
+                        : item.amount}
+                  </td>
+                  <td className="text-gray-400 cursor-pointer">
+                    {trashIcon(item.createdAt as Date)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     );
   };
@@ -98,7 +156,9 @@ const Table = (props: TableProps) => {
         </div>
       ) : (
         <div>
-          <h2 className="text-[24px] font-bold mb-10">{emptyValue}</h2>
+          <h2 className="text-[24px] font-bold mb-10 text-white">
+            {emptyValue}
+          </h2>
         </div>
       )}
     </div>
