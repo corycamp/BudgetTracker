@@ -4,7 +4,6 @@ export function getPreviousMonthRange() {
   const month = now.getMonth();
   const endOfPrevMonth = new Date(Date.UTC(year, month, 0, 23, 59, 59, 999)); // last day of previous month
   const endOfPast6Month = new Date(Date.UTC(year, month-5, 0, 23, 59, 59, 999)); // last day of previous month
-  console.log(endOfPast6Month)
   return {endOfPrevMonth, endOfPast6Month};
 }
 

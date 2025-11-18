@@ -126,6 +126,7 @@ const BudgetModal = ({
               <button
                 className="shadow w-full lg:w-auto bg-green-700 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hover:cursor-pointer"
                 type="submit"
+                disabled={!selectedCategory.length || !formValues.Limit.length}
               >
                 Add Budget
               </button>
@@ -159,6 +160,7 @@ const BudgetModal = ({
                 <button
                   className="shadow w-full lg:w-auto bg-green-700 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded hover:cursor-pointer"
                   type="submit"
+                  disabled={!formValues.Limit.length}
                 >
                   Update Budget
                 </button>
@@ -212,7 +214,14 @@ const BudgetModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose();
+        setSelectedCategory("");
+        setFormValues({ Limit: "" });
+      }}
+    >
       <>
         {loading ? (
           <div className="flex flex-row justify-center">
