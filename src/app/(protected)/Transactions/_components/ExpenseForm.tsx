@@ -43,7 +43,7 @@ const ExpenseForm = () => {
     !formValues.Amount ||
     !formValues.Date ||
     !formValues.Merchant ||
-    !selectedCategory.length;
+    !selectedCategory?.length;
   return (
     <div className="flex flex-col min-w-1/4 mb-10 lg:mb-0">
       <form onSubmit={handleSubmit}>

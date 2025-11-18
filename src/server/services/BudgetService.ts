@@ -23,7 +23,7 @@ export class BudgetService{
     async createBudget(input:CreateBudget):Promise<{success:boolean}>{
         try{
             const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:input.category, email:input.email}).toArray();
-            if(!!existingBudget.length) throw new Error("Budget already exists");
+            if(!!existingBudget?.length) throw new Error("Budget already exists");
             const budget = await this.budget.getCollection<Budget>("budgets").insertOne({...input,createdAt:new Date()})
             console.log(`${JSON.stringify(budget)} --  Added successfully`);
             return {success:true}
@@ -37,7 +37,7 @@ export class BudgetService{
             const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:`${input.category}`,
             email:`${input.email}`
             }).toArray();
-            if(!existingBudget.length) throw new Error("Budget does not exists");
+            if(!existingBudget?.length) throw new Error("Budget does not exists");
             const budget = await this.budget.getCollection<Budget>("budgets").deleteOne({category:`${input.category}`,
             email:`${input.email}`
             })
@@ -53,7 +53,7 @@ export class BudgetService{
             const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:`${input.category}`,
             email:`${input.email}`
             }).toArray();
-            if(!existingBudget.length) throw new Error("Budget does not exists");
+            if(!existingBudget?.length) throw new Error("Budget does not exists");
             const budget = await this.budget.getCollection<Budget>("budgets").updateOne({category:`${input.category}`,
             email:`${input.email}`
             },{$set:{limit:input.newLimit}})

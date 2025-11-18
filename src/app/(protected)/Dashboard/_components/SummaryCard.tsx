@@ -12,7 +12,7 @@ const SummaryCard = (props: SummaryCardProps) => {
   const [open, setOpen] = React.useState<boolean>(true);
 
   const budgetBars = () => {
-    if (!!budgets.length)
+    if (!!budgets?.length)
       return budgets?.map((item: BudgetState, index) => {
         const expenseValue = expenses
           .filter((expense: ExpenseState) => expense.category === item.category)

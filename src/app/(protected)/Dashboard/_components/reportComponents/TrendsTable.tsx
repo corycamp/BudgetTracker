@@ -21,7 +21,7 @@ const TrendsTable = () => {
 
   const handleGetExpenses = async (email: string) => {
     const data: SpendingTrendItem[] = await getPastExpenses(email);
-    if (!!data.length) {
+    if (!!data?.length) {
       const sortedData = data.sort((item1, item2) => {
         const item1MonthIndex = MONTHS.indexOf(item1.month);
         const item2MonthIndex = MONTHS.indexOf(item2.month);
@@ -45,7 +45,7 @@ const TrendsTable = () => {
             size={35}
           />
         </div>
-      ) : !!spendingTrendData.length ? (
+      ) : !!spendingTrendData?.length ? (
         <div>
           <div className="flex justify-between items-center mb-10">
             <h2 className="text-lg font-semibold text-white">

@@ -18,7 +18,7 @@ const SpendCategory = (props: {
   const { categoryData } = props;
   return (
     <div className="lg:col-span-2 bg-[#1C1E24] rounded-2xl p-6">
-      {!!categoryData.length ? (
+      {!!categoryData?.length ? (
         <div className="lg:col-span-2 bg-[#1C1E24] rounded-2xl p-6">
           <div className="flex justify-between items-center mb-15">
             <h2 className="text-lg font-semibold text-white">

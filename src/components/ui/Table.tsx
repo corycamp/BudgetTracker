@@ -149,7 +149,7 @@ const Table = (props: TableProps) => {
           {title}
         </h1>
       )}
-      {!!data.length ? (
+      {!!data?.length ? (
         <div>
           {desktopTableItem()}
           {mobileTableItem()}

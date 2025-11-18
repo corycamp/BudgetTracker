@@ -45,7 +45,7 @@ export class ExpenseService{
            const existingExpense = await this.expense.getCollection<Expense>("expenses").find({createdAt:date,
            email:`${input.email}`
            }).toArray();
-           if(!existingExpense.length) throw new Error("Expense does not exists");
+           if(!existingExpense?.length) throw new Error("Expense does not exists");
            const expense = await this.expense.getCollection<Expense>("expenses").deleteOne({createdAt:date,
            email:`${input.email}`
            })
