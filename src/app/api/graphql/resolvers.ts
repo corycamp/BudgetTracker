@@ -190,7 +190,6 @@ export async function getPastExpensess(email:string) {
 }
 
 export async function createExpense(input:CreateExpense){
-  console.log(input)
    const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -200,7 +199,6 @@ export async function createExpense(input:CreateExpense){
     cache: "no-store" // avoids stale data
   });
    const json = await res.json();
-   console.log(json.data)
   return json.data.createExpense.success;
 }
 

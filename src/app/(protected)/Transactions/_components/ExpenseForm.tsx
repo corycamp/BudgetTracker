@@ -30,7 +30,8 @@ const ExpenseForm = () => {
       category: selectedCategory,
       merchant: formValues.Merchant,
       email: `${user.email}`,
-      createdAt: Number(new Date(formValues.Date).getTime()),
+      date: Number(new Date(formValues.Date).getTime()),
+      createdAt: new Date().getTime(),
     };
     const response = await createExpense(expenseObject);
     if (!!response) {

@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DashboardText } from "@/components/common/constants";
 import PageProvier from "@/components/ui/PageProvider";
 import Overview from "./_components/Overview";
 import Reports from "./_components/Reports";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "@/redux/userSlice";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState<"Overview" | "Report">(

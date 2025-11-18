@@ -1,11 +1,5 @@
-import { Budget } from "@/lib/types";
+import { BudgetState } from "@/components/common/interfaces";
 import { createSlice, PayloadAction} from "@reduxjs/toolkit";
-
-export interface BudgetState{
-  category:string;
-  limit:number;
-  createdAt:string;
-}
 
 const initialState: BudgetState[] = [];
 
@@ -17,7 +11,7 @@ export const BudgetSlice = createSlice({
     addBudget: (state, action: PayloadAction<BudgetState>) => {
       state.push(action.payload)
     },
-    findAndUpdateBudget: (state, action: PayloadAction<{limit:number;category:string;createdAt:string}>) => {
+    findAndUpdateBudget: (state, action: PayloadAction<{limit:number;category:string;createdAt:number}>) => {
       const filteredItems = state.filter(items=> items.category != action.payload.category)
       return [...filteredItems,{
         category: action.payload.category,

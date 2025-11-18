@@ -63,7 +63,7 @@ const BudgetModal = ({
           addBudget({
             category: selectedCategory,
             limit: Number(formValues.Limit),
-            createdAt: new Date().toUTCString(),
+            createdAt: Number(new Date()),
           })
         );
       }
@@ -78,7 +78,7 @@ const BudgetModal = ({
           findAndUpdateBudget({
             limit: Number(formValues.Limit),
             category: item ?? "",
-            createdAt: new Date().toUTCString(),
+            createdAt: Number(new Date()),
           })
         );
       }

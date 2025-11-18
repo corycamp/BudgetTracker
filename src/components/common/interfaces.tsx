@@ -22,6 +22,27 @@ export interface PageProviderProps {
 export interface CardProps {
   title: string;
   amount: number;
+  loading: boolean;
+}
+
+export interface BudgetState {
+  category: string;
+  limit: number;
+  createdAt: number;
+}
+
+export interface ExpenseState {
+  amount: number;
+  category: string;
+  merchant: string;
+  createdAt: number;
+  date: number;
+  notes?: string;
+}
+
+export interface SummaryCardProps {
+  budgets: BudgetState[];
+  expenses: ExpenseState[];
 }
 
 export interface InputFieldProps {

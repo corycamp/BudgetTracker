@@ -22,10 +22,12 @@ export class ExpenseService{
 
      async createExpense(input:CreateExpense):Promise<{success:boolean}>{
         try{
-            const date = new Date(input.createdAt)
+            const createdAt = new Date(input.createdAt)
+            const date = new Date(input.date)
             const expense = await this.expense.getCollection<Expense>("expenses").insertOne({
             ...input,
-            createdAt:date
+            createdAt:createdAt,
+            date:date
         });
             console.log(`${JSON.stringify(expense)} --  Added successfully`);
             return {success:true};

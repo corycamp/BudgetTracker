@@ -11,6 +11,7 @@ export const typeDefs = gql`
 
     type Expense{
         amount: Float
+        date: String
         createdAt: String
         category: String
         merchant: String
@@ -31,6 +32,7 @@ export const typeDefs = gql`
         amount: Float!
         category: String!
         merchant: String!
+        date: Float!
         createdAt:Float!
         email:String!
         notes: String

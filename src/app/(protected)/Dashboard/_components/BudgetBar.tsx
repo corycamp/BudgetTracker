@@ -1,13 +1,13 @@
-const BudgetBar = () => {
-  const value = 750;
-  const max = 1000;
-
+const BudgetBar = (props: { value: number; max: number }) => {
+  const { value, max } = props;
   const percent = (value / max) * 100;
   return (
     <div className="flex flex-col mb-5">
       <div className="flex flex-row mb-4 items-center justify-between">
         <h2 className="text-[20px] font-medium text-white">Food Budget</h2>
-        <h3 className="text-[18px] font-medium text-green-400">{`${percent}%`}</h3>
+        <h3 className="text-[18px] font-medium text-green-400">{`${percent.toFixed(
+          2
+        )}%`}</h3>
       </div>
       {/* Progress bar */}
       <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">

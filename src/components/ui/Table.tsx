@@ -40,10 +40,10 @@ const Table = (props: TableProps) => {
 
   const itemCard = (item: Expense, index: number) => {
     let date = "";
-    if (`${item.createdAt}`.includes("-")) {
-      date = getDateString(new Date(item.createdAt));
+    if (`${item.date}`.includes("-")) {
+      date = getDateString(new Date(item.date));
     } else {
-      date = getDateString(item.createdAt as Date);
+      date = getDateString(item.date as Date);
     }
     return (
       <div

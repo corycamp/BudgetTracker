@@ -5,9 +5,8 @@ import { store } from "./store";
 import { setUser, UserState } from "./userSlice";
 import { useEffect } from "react";
 import { Budget, Expense } from "@/lib/types";
-import { ExpenseState, setExpenses } from "./expenseSlice";
+import { setExpenses } from "./expenseSlice";
 import { setBudget } from "./budgetSlice";
-import { getDateString } from "@/lib/utils/dateRange";
 
 export default function Providers({
   children,
@@ -31,6 +30,7 @@ export default function Providers({
               category: expense.category,
               merchant: expense.merchant,
               createdAt: Number(expense.createdAt),
+              date: Number(expense.date),
             };
           })
         )
@@ -41,7 +41,7 @@ export default function Providers({
             return {
               limit: budget.limit,
               category: budget.category,
-              createdAt: getDateString(budget.createdAt),
+              createdAt: Number(budget.createdAt),
             };
           })
         )
