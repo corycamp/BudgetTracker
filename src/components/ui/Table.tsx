@@ -1,16 +1,49 @@
 import { Expense } from "@/lib/types";
 import { TableProps } from "../common/interfaces";
 import { getDateString } from "@/lib/utils/dateRange";
+import { Trash } from "lucide-react";
+import { deleteExpense } from "@/app/api/graphql/resolvers";
+import { useDispatch, useSelector } from "react-redux";
+import { removeExpense } from "@/redux/expenseSlice";
 
 const Table = (props: TableProps) => {
   const { title, header, emptyValue, data } = props;
+  const user = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
+
+  const handleDelete = async (createdAt: Date) => {
+    const response = await deleteExpense({
+      createdAt: Number(createdAt),
+      email: `${user.email}`,
+    });
+    console.log("response", response);
+    if (!!response) {
+      dispatch(
+        removeExpense({
+          createdAt: Number(createdAt),
+        })
+      );
+    }
+  };
+
+  const trashIcon = (createdAt: Date) => {
+    return (
+      <Trash
+        size={20}
+        onClick={(e) => {
+          e.preventDefault();
+          handleDelete(createdAt);
+        }}
+      />
+    );
+  };
 
   const itemCard = (item: Expense, index: number) => {
     let date = "";
-    if (typeof item.createdAt == "string") {
+    if (`${item.createdAt}`.includes("-")) {
       date = getDateString(new Date(item.createdAt));
     } else {
-      date = getDateString(item.createdAt);
+      date = getDateString(item.createdAt as Date);
     }
     return (
       <div
@@ -23,10 +56,20 @@ const Table = (props: TableProps) => {
           <h5 className="text-gray-400">{date}</h5>
         </div>
         <div className="flex flex-row items-center ml-2">
-          <div className="flex flex-wrap rounded-4xl bg-gray-100 min-w-15 p-2 justify-center">
+          <div className="hidden sm:flex flex-wrap rounded-4xl bg-gray-100 min-w-15 p-2 justify-center">
             <h3 className="text-[15px]">{item.category}</h3>
           </div>
-          <h3 className="text-[20px] text-white ml-5">${item.amount}</h3>
+          <h3 className="text-[20px] text-white ml-5">
+            $
+            {item.amount > 1000000
+              ? `${(item.amount / 1000000).toFixed(2)}M`
+              : item.amount > 1000
+                ? `${(item.amount / 1000).toFixed(2)}K`
+                : item.amount}
+          </h3>
+          <div className="text-white ml-2">
+            {trashIcon(item.createdAt as Date)}
+          </div>
         </div>
       </div>
     );
@@ -57,6 +100,7 @@ const Table = (props: TableProps) => {
                   {item}
                 </th>
               ))}
+              <th className="py-3"></th>
             </tr>
           </thead>
           <tbody>
@@ -80,7 +124,15 @@ const Table = (props: TableProps) => {
                     {item.merchant}
                   </td>
                   <td className="py-4 px-6 font-medium text-white">
-                    {`$${item.amount}`}
+                    $
+                    {item.amount > 1000000
+                      ? `${(item.amount / 1000000).toFixed(2)}M`
+                      : item.amount > 1000
+                        ? `${(item.amount / 1000).toFixed(2)}K`
+                        : item.amount}
+                  </td>
+                  <td className="text-gray-400 cursor-pointer">
+                    {trashIcon(item.createdAt as Date)}
                   </td>
                 </tr>
               );

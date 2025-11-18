@@ -62,7 +62,7 @@ export interface SpentItemsProps {
   data: SpentItemProps[];
 }
 
-export interface Budgets {
+export interface BudgetTableItemProps {
   category: string;
   limit: number;
   spent: number;

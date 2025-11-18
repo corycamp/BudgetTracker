@@ -1,4 +1,4 @@
-import { CreateExpense } from "@/lib/types";
+import { CreateBudget, CreateExpense, DeleteBudget, DeleteExpense, UpdateBudget } from "@/lib/types";
 
 const CREATE_EXPENSE_MUTATION = `
   mutation CreateExpense($input: CreateExpense!) {
@@ -17,16 +17,24 @@ const CREATE_BUDGET_MUTATION = `
 `;
 
 const DELETE_BUDGET_MUTATION = `
-  mutation CreateBudget($input: DeleteBudget!){
-    createBudget(input: $input){
+  mutation DeleteBudget($input: DeleteBudget!){
+    deleteBudget(input: $input){
       success
     }
   }
 `;
 
 const UPDATE_BUDGET_MUTATION = `
-  mutation CreateBudget($input: UpdateBudget!){
-    createBudget(input: $input){
+  mutation UpdateBudget($input: UpdateBudget!){
+    updateBudget(input: $input){
+      success
+    }
+  }
+`;
+
+const DELETE_EXPENSE_MUTATION = `
+  mutation DeleteExpense($input: DeleteExpense!) {
+    deleteExpense(input: $input) {
       success
     }
   }
@@ -57,55 +65,51 @@ const res = await fetch(process.env.GRAPHQL_URL!, {
   return json.data.getAllBudgets;
 }
 
-export async function deleteBudget(email:string, category:string){
+export async function deleteBudget(input:DeleteBudget){
 
-const res = await fetch(process.env.GRAPHQL_URL!, {
+const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query:DELETE_BUDGET_MUTATION, variables:{
-        email:email,
-        category:category
+        input:input
       } 
     }),
     cache: "no-store" // avoids stale data
   });
 
   const json = await res.json();
-  return json.data.deleteBudget;
+  return json.data.deleteBudget.success;
 }
 
-export async function updateBudget(email:string, newLimit:number, category:string){
-const res = await fetch(process.env.GRAPHQL_URL!, {
+export async function updateBudget(input:UpdateBudget){
+  console.log(input)
+const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query:UPDATE_BUDGET_MUTATION, variables:{
-        email:email,
-        newLimit:newLimit,
-        category:category
+        input:input
       } 
     }),
     cache: "no-store" // avoids stale data
   });
 
   const json = await res.json();
-  return json.data.updateBudget;
+  return json.data.updateBudget.success;
 }
 
-export async function createBudget(email:string, category:string, limit:number){
-const res = await fetch(process.env.GRAPHQL_URL!, {
+export async function createBudget(input:CreateBudget){
+const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query:CREATE_BUDGET_MUTATION, variables:{
-        email:email,
-        category:category,
-        limit:limit
+        input:input
       } 
     }),
     cache: "no-store" // avoids stale data
   });
 
   const json = await res.json();
-  return json.data.createBudget;
+  return json.data.createBudget.success;
 }
 
 export async function getAllExpenses(email:string) {
@@ -146,7 +150,6 @@ export async function getCurrentExpenses(email:string) {
         }
     }
   `;
-  console.log(process.env.GRAPHQL_URL)
   const res = await fetch(process.env.GRAPHQL_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -188,7 +191,6 @@ export async function getPastExpensess(email:string) {
 
 export async function createExpense(input:CreateExpense){
   console.log(input)
-  console.log(process.env.NEXT_PUBLIC_URL)
    const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -200,4 +202,21 @@ export async function createExpense(input:CreateExpense){
    const json = await res.json();
    console.log(json.data)
   return json.data.createExpense.success;
+}
+
+export async function deleteExpense(input:DeleteExpense){
+console.log(input)
+const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query:DELETE_EXPENSE_MUTATION, variables:{
+        input:input
+      } 
+    }),
+    cache: "no-store" // avoids stale data
+  });
+
+  const json = await res.json();
+  console.log(json.data)
+  return json.data.deleteExpense.success;
 }

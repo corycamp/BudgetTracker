@@ -1,6 +1,6 @@
 import {gql} from "graphql-tag"
 import { getAppModule } from "../appModule/provider";
-import { CreateBudget, CreateExpense, DeleteBudget, UpdateBudget } from "@/lib/types";
+import { CreateBudget, CreateExpense, DeleteBudget, DeleteExpense, UpdateBudget } from "@/lib/types";
 
 export const typeDefs = gql`
     type Budget{
@@ -31,7 +31,7 @@ export const typeDefs = gql`
         amount: Float!
         category: String!
         merchant: String!
-        createdAt:String!
+        createdAt:Float!
         email:String!
         notes: String
     }
@@ -47,6 +47,11 @@ export const typeDefs = gql`
         email:String!
     }
 
+    input DeleteExpense{
+        createdAt: Float!
+        email: String!
+    }
+
     
     type Query{
         getAllBudgets(email:String!): [Budget]
@@ -60,6 +65,7 @@ export const typeDefs = gql`
         createExpense(input: CreateExpense!): ResponseObject
         deleteBudget(input: DeleteBudget!): ResponseObject
         updateBudget(input: UpdateBudget!): ResponseObject
+        deleteExpense(input: DeleteExpense!): ResponseObject
     }
 `;
 
@@ -82,6 +88,9 @@ export const resolvers = {
         },
         createExpense:async(_: any, {input}:{input:CreateExpense})=>{
             return await getAppModule().expenseController.createExpense(input)
+        },
+        deleteExpense:async(_: any, {input}:{input:DeleteExpense})=>{
+            return await getAppModule().expenseController.deleteExpense(input)
         },
     }
 }

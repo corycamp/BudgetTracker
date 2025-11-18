@@ -6,14 +6,37 @@ import PageProvier from "@/components/ui/PageProvider";
 import { BudgetText } from "@/components/common/constants";
 import BudgetTable from "./_components/BudgetTable";
 import BudgetModal from "./_components/BudgetModal";
-import { budgetOption, Budgets } from "@/components/common/interfaces";
+import {
+  budgetOption,
+  BudgetTableItemProps,
+} from "@/components/common/interfaces";
 import { useSelector } from "react-redux";
+import { Budget as BudgetProps, Expense } from "@/lib/types";
 
 const Budget = () => {
   const budgets = useSelector((state: any) => state.budget);
-  console.log(budgets);
+  const expenses = useSelector((state: any) => state.expense);
+  const user = useSelector((state: any) => state.user);
+  const budgetData: BudgetTableItemProps[] = budgets.map(
+    (item: BudgetProps) => {
+      let spent = 0;
+      expenses
+        .filter(
+          (expenseItem: Expense) => expenseItem.category === item.category
+        )
+        .forEach((expenseItem: Expense) => (spent += expenseItem.amount));
+      return {
+        category: item.category,
+        limit: item.limit,
+        spent: spent,
+      };
+    }
+  );
   const [open, setOpen] = useState<boolean>(false);
   const [type, setType] = useState<budgetOption>("createBudget");
+  const [selectedBudget, setSelectedBudget] = useState<
+    BudgetTableItemProps | undefined
+  >();
   const customButton = () => (
     <button
       className="bg-green-500 text-black font-semibold p-4 py-2 rounded-full flex items-center lg:gap-2 hover:bg-green-400 transition hover:cursor-pointer"
@@ -32,7 +55,13 @@ const Budget = () => {
       pageSubHeading={BudgetText.subHeading}
       customButton={customButton}
     >
-      <BudgetModal isOpen={open} onClose={() => setOpen(!open)} type={type} />
+      <BudgetModal
+        isOpen={open}
+        onClose={() => setOpen(!open)}
+        type={type}
+        item={selectedBudget?.category}
+        email={`${user.email}`}
+      />
       {/* <div className="h-screen bg-[#0D0F14] text-white font-sans p-8"> */}
       <div className="pb-10 md:pb-0">
         {/* Current Budgets */}
@@ -41,14 +70,11 @@ const Budget = () => {
             Current Budgets
           </h2>
           <BudgetTable
-            budgets={budgets}
-            removeClick={() => {
+            budgets={budgetData}
+            updateFn={(item: BudgetTableItemProps, type: budgetOption) => {
               setOpen(!open);
-              setType("confirmBudget");
-            }}
-            updateClick={() => {
-              setOpen(!open);
-              setType("editBudget");
+              setType(type);
+              setSelectedBudget(item);
             }}
           />
         </section>

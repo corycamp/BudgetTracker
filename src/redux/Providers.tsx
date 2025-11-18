@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Budget, Expense } from "@/lib/types";
 import { ExpenseState, setExpenses } from "./expenseSlice";
 import { setBudget } from "./budgetSlice";
+import { getDateString } from "@/lib/utils/dateRange";
 
 export default function Providers({
   children,
@@ -22,8 +23,29 @@ export default function Providers({
   useEffect(() => {
     if (user) {
       store.dispatch(setUser(user));
-      store.dispatch(setExpenses(expenses as ExpenseState[]));
-      store.dispatch(setBudget(budgets));
+      store.dispatch(
+        setExpenses(
+          expenses.map((expense) => {
+            return {
+              amount: expense.amount,
+              category: expense.category,
+              merchant: expense.merchant,
+              createdAt: Number(expense.createdAt),
+            };
+          })
+        )
+      );
+      store.dispatch(
+        setBudget(
+          budgets.map((budget) => {
+            return {
+              limit: budget.limit,
+              category: budget.category,
+              createdAt: getDateString(budget.createdAt),
+            };
+          })
+        )
+      );
     }
   }, [user]);
 

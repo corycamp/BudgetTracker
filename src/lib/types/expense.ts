@@ -3,7 +3,7 @@ export interface CreateExpense{
     category:string;
     merchant:string;
     email:string;
-    createdAt:string;
+    createdAt:number;
     notes?:string;
 }
 

@@ -20,3 +20,8 @@ export interface DeleteBudget{
     category: string;
     email:string;
 }
+
+export interface DeleteExpense{
+    createdAt: number;
+    email:string;
+}
