@@ -30,4 +30,4 @@ export const BudgetSlice = createSlice({
 });
 
 export const { setBudget, addBudget, findAndUpdateBudget, removeBudget, clearBudget } = BudgetSlice.actions;
-export default BudgetSlice.reducer;
+export default BudgetSlice?.reducer;

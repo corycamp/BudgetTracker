@@ -11,8 +11,8 @@ export class BudgetService{
         try{
             const budgets = await this.budget.getCollection<Budget>("budgets").find({
                 email:`${email}`
-            }).sort({createdAt:-1})
-            .toArray();
+            })?.sort({createdAt:-1})
+            ?.toArray();
             return budgets;
         }catch(e){
             console.log(e)
@@ -36,7 +36,7 @@ export class BudgetService{
         try{
             const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:`${input.category}`,
             email:`${input.email}`
-            }).toArray();
+            })?.toArray();
             if(!existingBudget?.length) throw new Error("Budget does not exists");
             const budget = await this.budget.getCollection<Budget>("budgets").deleteOne({category:`${input.category}`,
             email:`${input.email}`
@@ -52,7 +52,7 @@ export class BudgetService{
         try{
             const existingBudget = await this.budget.getCollection<Budget>("budgets").find({category:`${input.category}`,
             email:`${input.email}`
-            }).toArray();
+            })?.toArray();
             if(!existingBudget?.length) throw new Error("Budget does not exists");
             const budget = await this.budget.getCollection<Budget>("budgets").updateOne({category:`${input.category}`,
             email:`${input.email}`

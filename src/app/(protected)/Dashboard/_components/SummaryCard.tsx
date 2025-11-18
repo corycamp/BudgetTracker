@@ -16,7 +16,7 @@ const SummaryCard = (props: SummaryCardProps) => {
       return budgets?.map((item: BudgetState, index) => {
         const expenseValue = expenses
           .filter((expense: ExpenseState) => expense.category === item.category)
-          .reduce(
+          ?.reduce(
             (acc: number, expenseItem: ExpenseState) =>
               acc + expenseItem.amount,
             0

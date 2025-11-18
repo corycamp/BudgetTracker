@@ -21,7 +21,7 @@ const Reports = () => {
             (innerExpense: ExpenseState) =>
               innerExpense.category === expense.category
           )
-          .reduce((acc: number, item: ExpenseState) => acc + item.amount, 0);
+          ?.reduce((acc: number, item: ExpenseState) => acc + item.amount, 0);
         return {
           name: expense.category,
           value: total,
@@ -39,8 +39,8 @@ const Reports = () => {
           merchant: expense.merchant,
         }) as SpentItemProps
     )
-    .sort((item1, item2) => item2.amount - item1.amount)
-    .slice(0, 5);
+    ?.sort((item1, item2) => item2.amount - item1.amount)
+    ?.slice(0, 5);
   return (
     <div className="pb-10">
       {/* Grid Layout */}

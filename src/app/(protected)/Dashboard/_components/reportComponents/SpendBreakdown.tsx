@@ -9,7 +9,7 @@ const SpendBreakdown = (props: {
   }[];
 }) => {
   const { data } = props;
-  const total = data.reduce(
+  const total = data?.reduce(
     (
       acc: number,
       item: {

@@ -13,8 +13,8 @@ export class ExpenseService{
     async getAllExpenses(email:string):Promise<Expense[]>{
         try{
             const expense = await this.expense.getCollection<Expense>("expenses").find({email:`${email}`})
-            .sort({createdAt:-1})
-            .toArray();
+            ?.sort({createdAt:-1})
+            ?.toArray();
             return expense;
         }catch(e){
             console.log(e)
@@ -44,7 +44,7 @@ export class ExpenseService{
            const date = new Date(input.createdAt)
            const existingExpense = await this.expense.getCollection<Expense>("expenses").find({createdAt:date,
            email:`${input.email}`
-           }).toArray();
+           })?.toArray();
            if(!existingExpense?.length) throw new Error("Expense does not exists");
            const expense = await this.expense.getCollection<Expense>("expenses").deleteOne({createdAt:date,
            email:`${input.email}`
@@ -63,7 +63,7 @@ export class ExpenseService{
             const expense = await this.expense.getCollection<Expense>("expenses").find({
                 date:{$gte:last6Months.endOfPast6Month},
                 email:`${email}`
-            }).toArray();
+            })?.toArray();
             const spendingTrend = expense?.map((item:Expense)=>{
                 const month = MONTHS[new Date(item.date).getMonth()]
                 if(!alreadyFound.includes(month)){
@@ -73,7 +73,7 @@ export class ExpenseService{
                                 (innerExpense: Expense) =>
                                   MONTHS[new Date(innerExpense.date).getMonth()] === month
                               )
-                              .reduce((acc: number, item: Expense) => acc + item.amount, 0);
+                              ?.reduce((acc: number, item: Expense) => acc + item.amount, 0);
                     return{
                         month:month,
                         amount:total
@@ -94,8 +94,8 @@ export class ExpenseService{
                 date:{$gt:lastMonth.endOfPrevMonth},
                 email:`${email}`
             })
-            .sort({createdAt:-1})
-            .toArray();
+            ?.sort({createdAt:-1})
+            ?.toArray();
             return expense;
         }catch(e){
             console.log(e)

@@ -17,11 +17,11 @@ const Overview = () => {
   const expenses: ExpenseState[] = useSelector((state: any) => state.expense);
 
   useEffect(() => {
-    const totalBudget = budgets.reduce((acc: number, item: BudgetState) => {
+    const totalBudget = budgets?.reduce((acc: number, item: BudgetState) => {
       return acc + item.limit;
     }, 0);
 
-    const totalExpense = expenses.reduce((acc: number, item: ExpenseState) => {
+    const totalExpense = expenses?.reduce((acc: number, item: ExpenseState) => {
       return acc + item.amount;
     }, 0);
     setCardData([
