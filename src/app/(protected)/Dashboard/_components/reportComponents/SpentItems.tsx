@@ -16,7 +16,7 @@ const SpentItems = (props: SpentItemsProps) => {
     <div className="bg-[#1C1E24] rounded-2xl p-6">
       <h2 className="text-lg font-semibold mb-4 text-white">Top Spending</h2>
       <ul className="space-y-4">
-        {data.map((item: SpentItemProps, index) => {
+        {data?.map((item: SpentItemProps, index) => {
           return (
             <li className="flex items-center justify-between" key={index}>
               <div className="flex items-center gap-3">

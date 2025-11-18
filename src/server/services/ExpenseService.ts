@@ -64,7 +64,7 @@ export class ExpenseService{
                 date:{$gte:last6Months.endOfPast6Month},
                 email:`${email}`
             }).toArray();
-            const spendingTrend = expense.map((item:Expense)=>{
+            const spendingTrend = expense?.map((item:Expense)=>{
                 const month = MONTHS[new Date(item.date).getMonth()]
                 if(!alreadyFound.includes(month)){
                     alreadyFound.push(month)

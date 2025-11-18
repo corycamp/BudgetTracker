@@ -55,7 +55,7 @@ const InputField = (props: InputFieldProps) => {
                 className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pr-7 pl-3 text-base text-gray-500 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-green-600 sm:text-sm/6"
               >
                 {!!options &&
-                  options.map((option) => (
+                  options?.map((option) => (
                     <option key={option}>{option}</option>
                   ))}
               </select>

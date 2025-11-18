@@ -13,7 +13,7 @@ const SummaryCard = (props: SummaryCardProps) => {
 
   const budgetBars = () => {
     if (!!budgets.length)
-      return budgets.map((item: BudgetState, index) => {
+      return budgets?.map((item: BudgetState, index) => {
         const expenseValue = expenses
           .filter((expense: ExpenseState) => expense.category === item.category)
           .reduce(

@@ -13,7 +13,7 @@ const Reports = () => {
     name: string;
     value: number;
   }[] = expenses
-    .map((expense: ExpenseState) => {
+    ?.map((expense: ExpenseState) => {
       if (!alreadyFound.includes(expense.category)) {
         alreadyFound.push(expense.category);
         const total = expenses
@@ -31,7 +31,7 @@ const Reports = () => {
     .filter((item) => !!item);
 
   const spentItemData: SpentItemProps[] = expenses
-    .map(
+    ?.map(
       (expense: ExpenseState) =>
         ({
           amount: expense.amount,

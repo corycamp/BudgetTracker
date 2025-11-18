@@ -49,7 +49,7 @@ export default function Dropdown({
       {/* menu */}
       {open && (
         <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-20">
-          {options.map((option) => (
+          {options?.map((option) => (
             <button
               type="button"
               key={option}

@@ -19,7 +19,7 @@ const SpendBreakdown = (props: {
     ) => acc + item.value,
     0
   );
-  const breakDownData = data.map((item) => {
+  const breakDownData = data?.map((item) => {
     return {
       name: item.name,
       value: (item.value / total) * 100,
@@ -40,7 +40,7 @@ const SpendBreakdown = (props: {
               outerRadius={80}
               paddingAngle={4}
             >
-              {breakDownData.map((entry, index) => (
+              {breakDownData?.map((entry, index) => (
                 <Cell
                   key={index}
                   fill={getColorMap(entry.name as expenseCategory)}
@@ -54,7 +54,7 @@ const SpendBreakdown = (props: {
           <p className="text-gray-400 text-sm">Total Spent</p>
         </div>
         <ul className="mt-6 text-sm space-y-2">
-          {breakDownData.map((item) => {
+          {breakDownData?.map((item) => {
             return (
               <li
                 key={item.name}

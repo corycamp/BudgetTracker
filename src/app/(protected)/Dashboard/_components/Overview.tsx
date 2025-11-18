@@ -44,7 +44,7 @@ const Overview = () => {
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between">
-        {cardData.map((item, index) => {
+        {cardData?.map((item, index) => {
           return (
             <Card
               key={index}

@@ -24,7 +24,7 @@ export default function Providers({
       store.dispatch(setUser(user));
       store.dispatch(
         setExpenses(
-          expenses.map((expense) => {
+          expenses?.map((expense) => {
             return {
               amount: expense.amount,
               category: expense.category,
@@ -37,7 +37,7 @@ export default function Providers({
       );
       store.dispatch(
         setBudget(
-          budgets.map((budget) => {
+          budgets?.map((budget) => {
             return {
               limit: budget.limit,
               category: budget.category,

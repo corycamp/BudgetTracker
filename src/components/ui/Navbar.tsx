@@ -86,7 +86,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="w-auto flex flex-row justify-center mr-10">
-        {getNavLinks().map((item) => {
+        {getNavLinks()?.map((item) => {
           return (
             <div
               key={item}
@@ -184,7 +184,7 @@ const Navbar = () => {
         </div>
         {isOpen && (
           <div className="w-auto flex flex-col mt-5">
-            {getNavLinks().map((item) => {
+            {getNavLinks()?.map((item) => {
               return (
                 <div
                   key={item}

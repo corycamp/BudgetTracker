@@ -17,7 +17,7 @@ const Budget = () => {
   const budgets = useSelector((state: any) => state.budget);
   const expenses = useSelector((state: any) => state.expense);
   const user = useSelector((state: any) => state.user);
-  const budgetData: BudgetTableItemProps[] = budgets.map(
+  const budgetData: BudgetTableItemProps[] = budgets?.map(
     (item: BudgetProps) => {
       let spent = 0;
       expenses

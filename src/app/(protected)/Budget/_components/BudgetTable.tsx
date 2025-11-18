@@ -26,7 +26,7 @@ const BudgetTable = (props: BudgetTableProps) => {
           </tr>
         </thead>
         <tbody>
-          {budgets.map((b: BudgetTableItemProps, idx: number) => {
+          {budgets?.map((b: BudgetTableItemProps, idx: number) => {
             const percent = Math.round((b.spent / b.limit) * 100);
             const remaining = b.limit - b.spent;
             const barColor = percent >= 80 ? "bg-orange-500" : "bg-green-500";

@@ -36,7 +36,7 @@ const SpendCategory = (props: {
                 labelStyle={{ color: "#fff" }}
               />
               <Bar dataKey="value" fill="#4ade80" radius={[20, 20, 0, 0]}>
-                {categoryData.map((entry, index) => (
+                {categoryData?.map((entry, index) => (
                   <Cell
                     key={index}
                     fill={getColorMap(entry.name as expenseCategory)}
