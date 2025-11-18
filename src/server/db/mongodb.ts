@@ -1,5 +1,5 @@
 import { Budget, Expense, User } from "@/lib/types";
-import { MongoClient, Db, Collection } from "mongodb";
+import { MongoClient, Db, Collection, ServerApiVersion } from "mongodb";
 
 export class MongoDB{
     private client: MongoClient;
@@ -11,7 +11,14 @@ export class MongoDB{
             throw new Error("MONGODB_URI is not defined in the env")
         }
         console.log("Initializing database...")
-        this.client = new MongoClient(uri,{})
+        this.client = new MongoClient(uri,{
+            serverApi:{
+                version: ServerApiVersion.v1,
+                strict: true,
+                deprecationErrors: true,
+            },
+            tls: true,
+        })
     }
 
     async connect():Promise<void>{
