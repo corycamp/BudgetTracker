@@ -43,8 +43,8 @@ export default function AuthCard() {
       }
 
       await handleSignIn(e);
-    } catch (err) {
-      setError("Something went wrong");
+    } catch (err: any) {
+      setError("Something went wrong" + err.message);
     } finally {
       setLoadingDefault(false);
     }

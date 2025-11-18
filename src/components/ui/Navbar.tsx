@@ -7,12 +7,11 @@ import logo from "./assets/logo.svg";
 import Image from "next/image";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import { NavbarLink, User as UserInterface } from "../common/interfaces";
+import { NavbarLink } from "../common/interfaces";
 import { User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { PiDoor } from "react-icons/pi";
 import { useSelector } from "react-redux";
-import { UserState } from "@/redux/userSlice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -17,6 +17,7 @@ export class ExpenseService{
             .toArray();
             return expense;
         }catch(e){
+            console.log(e)
             throw new Error("Error connecting to database")
         }
     }
@@ -33,6 +34,7 @@ export class ExpenseService{
             console.log(`${JSON.stringify(expense)} --  Added successfully`);
             return {success:true};
         }catch(e){
+            console.log(e)
             throw new Error("Error connecting to database")
         }
     }
@@ -80,6 +82,7 @@ export class ExpenseService{
             }).filter(item=>!!item)
             return spendingTrend;
         }catch(e){
+            console.log(e)
             throw new Error("Error connecting to database")
         }
     }
@@ -95,6 +98,7 @@ export class ExpenseService{
             .toArray();
             return expense;
         }catch(e){
+            console.log(e)
             throw new Error("Error connecting to database")
         }
     }

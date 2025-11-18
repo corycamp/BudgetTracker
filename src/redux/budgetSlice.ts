@@ -23,8 +23,8 @@ export const BudgetSlice = createSlice({
       const filteredItems = state.filter(items=> items.category != action.payload.category)
       return [...filteredItems]
     },
-    clearBudget: (state) => {
-      state=[]
+    clearBudget: () => {
+      return[]
     },
   },
 });

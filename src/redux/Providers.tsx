@@ -47,7 +47,7 @@ export default function Providers({
         )
       );
     }
-  }, [user]);
+  }, [user, budgets, expenses]);
 
   return <Provider store={store}>{children}</Provider>;
 }

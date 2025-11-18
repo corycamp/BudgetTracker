@@ -15,6 +15,7 @@ export class BudgetService{
             .toArray();
             return budgets;
         }catch(e){
+            console.log(e)
             throw new Error("Error connecting to database")
         }
     }
