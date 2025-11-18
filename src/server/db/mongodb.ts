@@ -16,8 +16,7 @@ export class MongoDB{
                 version: ServerApiVersion.v1,
                 strict: true,
                 deprecationErrors: true,
-            },
-            tls: true,
+            }
         })
     }
 
