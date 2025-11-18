@@ -73,7 +73,13 @@ export default function AuthCard() {
   };
 
   useEffect(() => {
-    setLoadingGoogle(false);
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        setLoadingGoogle(false);
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
