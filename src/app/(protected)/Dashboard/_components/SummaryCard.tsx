@@ -13,7 +13,7 @@ const SummaryCard = (props: SummaryCardProps) => {
 
   const budgetBars = () => {
     if (!!budgets.length)
-      return budgets.map((item: BudgetState) => {
+      return budgets.map((item: BudgetState, index) => {
         const expenseValue = expenses
           .filter((expense: ExpenseState) => expense.category === item.category)
           .reduce(
@@ -21,7 +21,7 @@ const SummaryCard = (props: SummaryCardProps) => {
               acc + expenseItem.amount,
             0
           );
-        return <BudgetBar value={expenseValue} max={item.limit} />;
+        return <BudgetBar key={index} value={expenseValue} max={item.limit} />;
       });
     return (
       <div>

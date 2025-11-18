@@ -12,7 +12,6 @@ export const expenseSlice = createSlice({
     state.push(action.payload)
     },
     removeExpense:(state, action: PayloadAction<{createdAt:number}>) => {
-      state.forEach(item=>console.log(item))
       const filteredItems = state.filter(items=> items.createdAt != action.payload.createdAt)
       return [...filteredItems]
     },

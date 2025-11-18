@@ -1,18 +1,24 @@
-import { ResponsiveContainer, BarChart, XAxis, Tooltip, Bar } from "recharts";
+import { getColorMap } from "@/components/common/constants";
+import { expenseCategory } from "@/components/common/interfaces";
+import {
+  ResponsiveContainer,
+  BarChart,
+  XAxis,
+  Tooltip,
+  Bar,
+  Cell,
+} from "recharts";
 
-const SpendCategory = () => {
-  const categoryData = [
-    { name: "Food", value: 300 },
-    { name: "Transport", value: 250 },
-    { name: "Housing", value: 400 },
-    { name: "Entertainment", value: 200 },
-    { name: "Utilities", value: 350 },
-    { name: "Shopping", value: 450 },
-    { name: "Other", value: 150 },
-  ];
+const SpendCategory = (props: {
+  categoryData: {
+    name: string;
+    value: number;
+  }[];
+}) => {
+  const { categoryData } = props;
   return (
     <div className="lg:col-span-2 bg-[#1C1E24] rounded-2xl p-6">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-15">
         <h2 className="text-lg font-semibold text-white">
           Spending by Category
         </h2>
@@ -27,7 +33,14 @@ const SpendCategory = () => {
             contentStyle={{ backgroundColor: "#1C1E24", border: "none" }}
             labelStyle={{ color: "#fff" }}
           />
-          <Bar dataKey="value" fill="#4ade80" radius={[20, 20, 0, 0]} />
+          <Bar dataKey="value" fill="#4ade80" radius={[20, 20, 0, 0]}>
+            {categoryData.map((entry, index) => (
+              <Cell
+                key={index}
+                fill={getColorMap(entry.name as expenseCategory)}
+              />
+            ))}
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

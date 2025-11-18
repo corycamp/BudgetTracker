@@ -16,7 +16,6 @@ const Table = (props: TableProps) => {
       createdAt: Number(createdAt),
       email: `${user.email}`,
     });
-    console.log("response", response);
     if (!!response) {
       dispatch(
         removeExpense({
@@ -106,10 +105,10 @@ const Table = (props: TableProps) => {
           <tbody>
             {data?.map((item, index) => {
               let date = "";
-              if (`${item.createdAt}`.includes("-")) {
-                date = getDateString(new Date(item.createdAt));
+              if (`${item.date}`.includes("-")) {
+                date = getDateString(new Date(item.date));
               } else {
-                date = getDateString(item.createdAt as Date);
+                date = getDateString(item.date as Date);
               }
               return (
                 <tr

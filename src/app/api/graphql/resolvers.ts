@@ -82,7 +82,6 @@ const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
 }
 
 export async function updateBudget(input:UpdateBudget){
-  console.log(input)
 const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -143,6 +142,7 @@ export async function getCurrentExpenses(email:string) {
     query GetCurrentExpenses($email: String!) {
         getCurrentExpenses(email: $email) {
             amount
+            date
             createdAt
             category
             merchant
@@ -163,20 +163,17 @@ export async function getCurrentExpenses(email:string) {
   return json.data.getCurrentExpenses;
 }
 
-export async function getPastExpensess(email:string) {
+export async function getPastExpenses(email:string) {
   const query = `
     query GetPastExpenses($email: String!) {
         getPastExpenses(email: $email) {
             amount
-            createdAt
-            category
-            merchant
-            notes
+            month
         }
     }
   `;
 
-  const res = await fetch(process.env.GRAPHQL_URL!, {
+  const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query:query, variables:{
@@ -203,7 +200,6 @@ export async function createExpense(input:CreateExpense){
 }
 
 export async function deleteExpense(input:DeleteExpense){
-console.log(input)
 const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -215,6 +211,5 @@ const res = await fetch(process.env.NEXT_PUBLIC_URL!, {
   });
 
   const json = await res.json();
-  console.log(json.data)
   return json.data.deleteExpense.success;
 }

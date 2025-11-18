@@ -76,7 +76,7 @@ export interface TableProps {
 export interface SpentItemProps {
   merchant: string;
   category: expenseCategory;
-  amount: string;
+  amount: number;
 }
 
 export interface SpentItemsProps {

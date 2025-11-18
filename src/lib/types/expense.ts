@@ -16,3 +16,7 @@ export interface Expense{
     merchant:string;
     notes?:string;
 }
+export interface SpendingTrendItem{
+    month:string;
+    amount:number;
+}

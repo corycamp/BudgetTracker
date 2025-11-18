@@ -18,6 +18,11 @@ export const typeDefs = gql`
         notes: String
     }
 
+    type SpendingTrendItem{
+        amount: Float
+        month: String
+    }
+
     type ResponseObject{
         success:Boolean
     }
@@ -58,7 +63,7 @@ export const typeDefs = gql`
     type Query{
         getAllBudgets(email:String!): [Budget]
         getAllExpenses(email:String!): [Expense]
-        getPastExpenses(email:String!): [Expense]
+        getPastExpenses(email:String!): [SpendingTrendItem]
         getCurrentExpenses(email:String!): [Expense]
     }
 

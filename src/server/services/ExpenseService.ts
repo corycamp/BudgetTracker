@@ -1,6 +1,7 @@
-import { CreateExpense, DeleteExpense, Expense } from "@/lib/types";
+import { CreateExpense, DeleteExpense, Expense, SpendingTrendItem } from "@/lib/types";
 import { MongoDB } from "../db/mongodb";
 import { getPreviousMonthRange } from "@/lib/utils/dateRange";
+import { MONTHS } from "@/components/common/constants";
 
 
 export class ExpenseService{
@@ -53,16 +54,31 @@ export class ExpenseService{
         }
     }
 
-     async getPastExpenses(email:string):Promise<Expense[]>{
+     async getPastExpenses(email:string):Promise<SpendingTrendItem[]>{
         try{
-            const lastMonth = getPreviousMonthRange();
+            const last6Months = getPreviousMonthRange()
+            const alreadyFound:string[] = []
             const expense = await this.expense.getCollection<Expense>("expenses").find({
-                createdAt:{$lte:lastMonth.endOfPrevMonth},
+                date:{$gte:last6Months.endOfPast6Month},
                 email:`${email}`
-            })
-            .sort({createdAt:-1})
-            .toArray();
-            return expense;
+            }).toArray();
+            const spendingTrend = expense.map((item:Expense)=>{
+                const month = MONTHS[new Date(item.date).getMonth()]
+                if(!alreadyFound.includes(month)){
+                    alreadyFound.push(month)
+                    const total = expense
+                              .filter(
+                                (innerExpense: Expense) =>
+                                  MONTHS[new Date(innerExpense.date).getMonth()] === month
+                              )
+                              .reduce((acc: number, item: Expense) => acc + item.amount, 0);
+                    return{
+                        month:month,
+                        amount:total
+                    }
+                } 
+            }).filter(item=>!!item)
+            return spendingTrend;
         }catch(e){
             throw new Error("Error connecting to database")
         }
@@ -72,7 +88,7 @@ export class ExpenseService{
         try{
             const lastMonth = getPreviousMonthRange();
              const expense = await this.expense.getCollection<Expense>("expenses").find({
-                createdAt:{$gt:lastMonth.endOfPrevMonth},
+                date:{$gt:lastMonth.endOfPrevMonth},
                 email:`${email}`
             })
             .sort({createdAt:-1})

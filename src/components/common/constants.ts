@@ -69,6 +69,42 @@ export const iconMapping =(iconType:expenseCategory)=>{
     }
 }
 
+export const getColorMap = (categroy:expenseCategory)=>{
+     switch(categroy){
+        case "Food":
+            return "#0E6E1C"
+        case "Shopping":
+            return "#18C937"
+        case "Transportation":
+            return "#499951"
+        case "Housing":
+            return "#34703C"
+        case "Entertainment":
+            return "#74B57D"
+        case "Utilities":
+            return "#4C8553"
+        case "Other":
+            return "#19BF2F"
+        default:
+            return "#0E6E1C"
+    }
+}
+
 export const COLORS = ["#4ade80", "#22c55e", "#14532d"];
 
 export const CATEGORYLIST = ["Food","Shopping","Transportation","Housing","Entertainment","Utilities","Other"]
+
+export const MONTHS = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec" 
+]
