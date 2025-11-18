@@ -168,6 +168,9 @@ export default function AuthCard() {
             onClick={() => {
               setLoadingGoogle(!loadingGoogle);
               signIn("google", { callbackUrl: "/Dashboard" });
+              setTimeout(() => {
+                setLoadingGoogle(!loadingGoogle);
+              }, 3000);
             }}
           >
             {!loadingGoogle ? (
