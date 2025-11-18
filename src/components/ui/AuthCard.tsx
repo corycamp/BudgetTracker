@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import googleIcon from "./assets/google-icon.svg";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -71,6 +71,10 @@ export default function AuthCard() {
       router.replace("/Dashboard");
     }
   };
+
+  useEffect(() => {
+    setLoadingGoogle(false);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     tab === "login" ? await handleSignIn(e) : await handleSignUp(e);
@@ -168,9 +172,6 @@ export default function AuthCard() {
             onClick={() => {
               setLoadingGoogle(!loadingGoogle);
               signIn("google", { callbackUrl: "/Dashboard" });
-              setTimeout(() => {
-                setLoadingGoogle(!loadingGoogle);
-              }, 3000);
             }}
           >
             {!loadingGoogle ? (
